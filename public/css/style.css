@@ -57,3 +57,10 @@
 .card-body a {
     color: #454545;
 }
+
+.tags {
+    color: #454545;
+    background-color: #fff2ac;
+    background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
+    padding: 2px;
+}
