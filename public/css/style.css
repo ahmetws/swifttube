@@ -42,3 +42,18 @@
     letter-spacing: 0;
     line-height: 53.0px;
 }
+
+.video {
+    border-width: 0px;
+    /*height: 200px;*/
+    /*background: #e8e8e8;*/
+    /*border-color: #454545;*/
+}
+
+.video .img {
+    border-radius: 8px;
+}
+
+.card-body a {
+    color: #454545;
+}
