@@ -1,0 +1,4 @@
+module CCryptoOpenSSL {
+    umbrella "/Users/ahmetws/Desktop/swifttube/swifttube/.build/checkouts/crypto.git--4978123307497616946/Sources/CCryptoOpenSSL/include"
+    export *
+}

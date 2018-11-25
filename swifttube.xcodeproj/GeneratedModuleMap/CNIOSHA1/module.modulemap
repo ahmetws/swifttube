@@ -1,0 +1,4 @@
+module CNIOSHA1 {
+    umbrella "/Users/ahmetws/Desktop/swifttube/swifttube/.build/checkouts/swift-nio.git--1803969302186502983/Sources/CNIOSHA1/include"
+    export *
+}
