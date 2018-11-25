@@ -1,1 +1,1 @@
-web: swifttube --workers 1 --bind 0.0.0.0:$PORT
+web: Run --workers 1 --bind 0.0.0.0:$PORT
