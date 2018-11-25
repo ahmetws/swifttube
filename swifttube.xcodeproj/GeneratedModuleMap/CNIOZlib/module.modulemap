@@ -1,4 +1,4 @@
 module CNIOZlib {
-    umbrella "/Users/ahmetws/Desktop/swifttube/swifttube/.build/checkouts/swift-nio.git--1803969302186502983/Sources/CNIOZlib/include"
+    umbrella "/Users/ahmetws/Desktop/swiftist/swifttube/.build/checkouts/swift-nio.git--4997288932090921785/Sources/CNIOZlib/include"
     export *
 }
