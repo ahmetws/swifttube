@@ -7,14 +7,13 @@
 
 import Foundation
 import MongoKitten
-import Vapor
 
 class APIClient: APIProtocol {
     
-    let database: MongoKitten.Database?
-
-    init() {
-        if let url = Environment.get("DB_URL") {
+    let database: Database?
+    
+    init(databaseUrl: String?) {
+        if let url = databaseUrl {
             database = try? Database(url)
         } else {
             database = nil

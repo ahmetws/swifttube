@@ -3,7 +3,8 @@ import Vapor
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
 
-    let apiClient: APIProtocol = APIClient()
+    let databaseUrl = Environment.get("DB_URL")
+    let apiClient: APIProtocol = APIClient(databaseUrl: databaseUrl)
     
     router.get { req -> EventLoopFuture<View> in
         guard let videos = apiClient.getFeaturedVideos() else {
