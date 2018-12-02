@@ -1,0 +1,22 @@
+#set("content") {
+
+<div class="container mt-3 mb-2">
+<div class="row bg-light mt-1 ml-4 mr-4 p-5">
+
+<div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" src="#(video.url)" allowfullscreen></iframe>
+</div>
+<p class="header-text mt-4">
+#(video.title)
+</p>
+<hr>
+<p class="header-text mt-4">
+...
+</p>
+
+</div>
+</div>
+
+}
+
+#embed("base")
