@@ -67,4 +67,31 @@ class APIClient: APIProtocol {
         }
         return speaker
     }
+    
+    func getConferences() -> Array<Document>? {
+        guard let database = database else { return nil }
+        
+        guard let conferences = try? Array(database["conferences"].find()) else {
+            return nil
+        }
+        return conferences
+    }
+    
+    func getConference(shortUrl: String) -> Document? {
+        guard let database = database else { return nil }
+        
+        guard let conference = try? database["conferences"].findOne("shortname" == shortUrl) else {
+            return nil
+        }
+        return conference
+    }
+    
+    func getConferenceVideos(conferenceId: Primitive) -> Array<Document>? {
+        guard let database = database else { return nil }
+        
+        guard let videos = try? Array(database["videos"].find("conferences" == conferenceId)) else {
+            return nil
+        }
+        return videos
+    }
 }

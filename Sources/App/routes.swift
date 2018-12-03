@@ -1,4 +1,5 @@
 import Vapor
+import MongoKitten
 
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
@@ -28,6 +29,30 @@ public func routes(_ router: Router) throws {
         }
         
         return try req.view().render("videos", ["videos": videos])
+    }
+    
+    router.get("conferences") { req -> EventLoopFuture<View> in
+        guard let conferences = apiClient.getConferences() else {
+            return try req.view().render("index")
+        }
+        
+        return try req.view().render("conferences", ["conferences": conferences])
+    }
+    
+    router.get("conference", String.parameter) { req -> EventLoopFuture<View> in
+        let value = try req.parameters.next(String.self)
+        guard let conference = apiClient.getConference(shortUrl: value) else {
+            return try req.view().render("index")
+        }
+        
+        let confId = conference["_id"]!
+        
+        guard let videos = apiClient.getConferenceVideos(conferenceId: confId) else {
+            return try req.view().render("index")
+        }
+        
+        let context = ConferenceContext.init(videos: videos, conference: conference)
+        return try req.view().render("conference", context)
     }
     
     router.get("video", String.parameter) { req -> EventLoopFuture<View> in

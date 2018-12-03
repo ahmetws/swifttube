@@ -1,0 +1,20 @@
+<div class="container mt-1 pt-2 pb-2 pl-3 pr-3">
+<div class="row ml-4 mr-4 pb-1 mb-3 add-border-bottom">
+<div class="header-text">Videos</div>
+</div>
+
+<div class="row align-middle align-items-center justify-content-around ml-4 mr-4">
+
+#for(video in videos) {
+<div class="col-sm card video mr-1">
+<img class="card-img-top" src="#(video.image)" alt="#(video.title)">
+<div class="card-body">
+<a href="/video/#(video.shortUrl)">
+<h5 class="card-title">#(video.title)</h5>
+</a>
+<p class="card-subtitle">Swift & Fika 2018</p>
+<p class="card-text">John Sundell</p>
+</div>
+</div>
+}
+</div>

@@ -1,0 +1,32 @@
+<div class="container mt-3 pt-2 pb-2 pl-3 pr-3">
+<div class="row align-middle align-items-center justify-content-around ml-4 mr-4 mb-4">
+<div class="col-sm text-center mr-1 mb-1">
+<a class="tags" href="/tag/machinelearning">#machinelearning</a>
+</div>
+<div class="col-sm text-center mr-1 mb-1">
+<a class="tags" href="/tag/protocolorientedprogramming">#protocolorientedprogramming</a>
+</div>
+<div class="col-sm text-center mr-1 mb-1">
+<a class="tags" href="/tag/arkit">#arkit</a>
+</div>
+<div class="col-sm text-center mr-1 mb-1">
+<a class="tags" href="/tag/architecture">#architecture</a>
+</div>
+</div>
+
+<div class="row align-middle align-items-center justify-content-around ml-4 mr-4 mb-4 pb-4 add-border-bottom">
+<div class="col-sm text-center mr-1 mb-1">
+<a class="tags" href="/tag/continuousintegration">#continuousintegration</a>
+</div>
+<div class="col-sm text-center mr-1 mb-1">
+<a class="tags" href="/tag/serverside">#serverside</a>
+</div>
+<div class="col-sm text-center mr-1 mb-1">
+<a class="tags" href="/tag/tips">#tips</a>
+</div>
+<div class="col-sm text-center mr-1 mb-1">
+<a class="tags" href="/tag/motivation">#motivation</a>
+</div>
+</div>
+
+</div>

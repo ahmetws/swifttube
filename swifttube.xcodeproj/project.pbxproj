@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		4B45A5E921B435D700C003CF /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0B261B21B360C7000E4E87 /* APIProtocol.swift */; };
 		4B45A5EA21B435DD00C003CF /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0B261D21B3615E000E4E87 /* APIClient.swift */; };
+		4B45A5EC21B4C52700C003CF /* ConferenceContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B45A5EB21B4C52700C003CF /* ConferenceContext.swift */; };
 		OBJ_1024 /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* AppTests.swift */; };
 		OBJ_1026 /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swifttube::App::Product" /* App.framework */; };
 		OBJ_1027 /* MongoKitten.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "MongoKitten::MongoKitten::Product" /* MongoKitten.framework */; };
@@ -4677,6 +4678,7 @@
 /* Begin PBXFileReference section */
 		4B0B261B21B360C7000E4E87 /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		4B0B261D21B3615E000E4E87 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		4B45A5EB21B4C52700C003CF /* ConferenceContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceContext.swift; sourceTree = "<group>"; };
 		"BSON::BSON::Product" /* BSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Cheetah::Cheetah::Product" /* Cheetah.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cheetah.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Console::Command::Product" /* Command.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Command.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -6221,6 +6223,7 @@
 			children = (
 				4B0B261B21B360C7000E4E87 /* APIProtocol.swift */,
 				4B0B261D21B3615E000E4E87 /* APIClient.swift */,
+				4B45A5EB21B4C52700C003CF /* ConferenceContext.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -11313,6 +11316,7 @@
 				4B45A5E921B435D700C003CF /* APIProtocol.swift in Sources */,
 				OBJ_876 /* routes.swift in Sources */,
 				4B45A5EA21B435DD00C003CF /* APIClient.swift in Sources */,
+				4B45A5EC21B4C52700C003CF /* ConferenceContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
