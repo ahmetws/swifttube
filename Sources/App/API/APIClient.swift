@@ -68,6 +68,22 @@ class APIClient: APIProtocol {
         return speaker
     }
     
+    func getSpeakerVideos(speakerId: Primitive) -> Array<Document>? {
+        guard let database = database else { return nil }
+        
+//        let query: Query = Query(aqt: AQT.containsElement(key: "users", match: .in(key: "_id", in: [speakerId])))
+        
+        let query: Query = [
+            "users": [
+                speakerId
+            ]
+        ]
+        guard let videos = try? Array(database["videos"].find(query)) else {
+            return nil
+        }
+        return videos
+    }
+    
     func getConferences() -> Array<Document>? {
         guard let database = database else { return nil }
         

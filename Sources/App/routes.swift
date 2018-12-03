@@ -70,7 +70,14 @@ public func routes(_ router: Router) throws {
             return try req.view().render("speaker")
         }
         
-        return try req.view().render("speaker", ["speaker": speaker])
+        let speakerId = speaker["_id"]!
+
+        guard let videos = apiClient.getSpeakerVideos(speakerId: speakerId) else {
+            return try req.view().render("index")
+        }
+        
+        let context = SpeakerContext.init(videos: videos, speaker: speaker)
+        return try req.view().render("speaker", context)
     }
     
     router.get("tag", String.parameter) { req in
