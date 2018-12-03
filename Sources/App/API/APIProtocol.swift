@@ -10,6 +10,7 @@ import MongoKitten
 
 protocol APIProtocol {
     
+    func getVideos() -> Array<Document>?
     func getFeaturedVideos() -> Array<Document>?
     func getVideo(shortUrl: String) -> Document?
     

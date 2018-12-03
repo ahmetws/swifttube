@@ -21,6 +21,15 @@ class APIClient: APIProtocol {
         }
     }
     
+    func getVideos() -> Array<Document>? {
+        guard let database = database else { return nil }
+        
+        guard let videos = try? Array(database["videos"].find()) else {
+            return nil
+        }
+        return videos
+    }
+    
     func getFeaturedVideos() -> Array<Document>? {
         guard let database = database else { return nil }
         

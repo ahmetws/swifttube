@@ -22,6 +22,14 @@ public func routes(_ router: Router) throws {
         return try req.view().render("speakers", ["speakers": speakers])
     }
     
+    router.get("videos") { req -> EventLoopFuture<View> in
+        guard let videos = apiClient.getVideos() else {
+            return try req.view().render("index")
+        }
+        
+        return try req.view().render("videos", ["videos": videos])
+    }
+    
     router.get("video", String.parameter) { req -> EventLoopFuture<View> in
         let value = try req.parameters.next(String.self)
         guard let video = apiClient.getVideo(shortUrl: value) else {
