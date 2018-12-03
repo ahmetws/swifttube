@@ -38,4 +38,24 @@ class APIClient: APIProtocol {
         }
         return video
     }
+    
+    //MARK: - Speakers
+    
+    func getSpeakers() -> Array<Document>? {
+        guard let database = database else { return nil }
+        
+        guard let speakers = try? Array(database["users"].find()) else {
+            return nil
+        }
+        return speakers
+    }
+    
+    func getSpeaker(shortUrl: String) -> Document? {
+        guard let database = database else { return nil }
+        
+        guard let speaker = try? database["users"].findOne("shortname" == shortUrl) else {
+            return nil
+        }
+        return speaker
+    }
 }

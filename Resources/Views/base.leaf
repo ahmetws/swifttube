@@ -36,7 +36,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
                         <a class="nav-link" href="#">Conferences</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Speakers</a>
+                        <a class="nav-link" href="/speakers">Speakers</a>
                     </li>
                 </ul>
             </div>

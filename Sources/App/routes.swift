@@ -14,15 +14,30 @@ public func routes(_ router: Router) throws {
         return try req.view().render("index", ["videos": videos])
     }
     
+    router.get("speakers") { req -> EventLoopFuture<View> in
+        guard let speakers = apiClient.getSpeakers() else {
+            return try req.view().render("speakers")
+        }
+        
+        return try req.view().render("speakers", ["speakers": speakers])
+    }
+    
     router.get("video", String.parameter) { req -> EventLoopFuture<View> in
         let value = try req.parameters.next(String.self)
         guard let video = apiClient.getVideo(shortUrl: value) else {
-            // TODO: Article not found
             return try req.view().render("index")
         }
         
-        // TODO: Present article
         return try req.view().render("video", ["video": video])
+    }
+    
+    router.get("speaker", String.parameter) { req -> EventLoopFuture<View> in
+        let value = try req.parameters.next(String.self)
+        guard let speaker = apiClient.getSpeaker(shortUrl: value) else {
+            return try req.view().render("speaker")
+        }
+        
+        return try req.view().render("speaker", ["speaker": speaker])
     }
     
     router.get("tag", String.parameter) { req in

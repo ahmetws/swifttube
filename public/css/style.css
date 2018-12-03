@@ -68,3 +68,9 @@
     background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
     padding: 2px;
 }
+
+.roundedImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
