@@ -91,6 +91,15 @@ class APIClient: APIProtocol {
         return conferences
     }
     
+    func getFeaturedConferences() -> Array<Document>? {
+        guard let database = database else { return nil }
+        
+        guard let conferences = try? Array(database["conferences"].find("featured" == true)) else {
+            return nil
+        }
+        return conferences
+    }
+    
     func getConference(shortUrl: String) -> Document? {
         guard let database = database else { return nil }
         

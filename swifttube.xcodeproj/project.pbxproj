@@ -26,6 +26,7 @@
 		4B45A5EC21B4C52700C003CF /* ConferenceContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B45A5EB21B4C52700C003CF /* ConferenceContext.swift */; };
 		4B45A5EE21B5BE9800C003CF /* SpeakerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B45A5ED21B5BE9800C003CF /* SpeakerContext.swift */; };
 		4B45A5F021B5DA7000C003CF /* TagContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B45A5EF21B5DA7000C003CF /* TagContext.swift */; };
+		4B45A5F221B746A000C003CF /* HomeContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B45A5F121B746A000C003CF /* HomeContext.swift */; };
 		OBJ_1024 /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* AppTests.swift */; };
 		OBJ_1026 /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swifttube::App::Product" /* App.framework */; };
 		OBJ_1027 /* MongoKitten.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "MongoKitten::MongoKitten::Product" /* MongoKitten.framework */; };
@@ -4683,6 +4684,7 @@
 		4B45A5EB21B4C52700C003CF /* ConferenceContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceContext.swift; sourceTree = "<group>"; };
 		4B45A5ED21B5BE9800C003CF /* SpeakerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerContext.swift; sourceTree = "<group>"; };
 		4B45A5EF21B5DA7000C003CF /* TagContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagContext.swift; sourceTree = "<group>"; };
+		4B45A5F121B746A000C003CF /* HomeContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContext.swift; sourceTree = "<group>"; };
 		"BSON::BSON::Product" /* BSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Cheetah::Cheetah::Product" /* Cheetah.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cheetah.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Console::Command::Product" /* Command.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Command.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -6230,6 +6232,7 @@
 				4B45A5EB21B4C52700C003CF /* ConferenceContext.swift */,
 				4B45A5ED21B5BE9800C003CF /* SpeakerContext.swift */,
 				4B45A5EF21B5DA7000C003CF /* TagContext.swift */,
+				4B45A5F121B746A000C003CF /* HomeContext.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -11318,6 +11321,7 @@
 			files = (
 				OBJ_873 /* app.swift in Sources */,
 				OBJ_874 /* boot.swift in Sources */,
+				4B45A5F221B746A000C003CF /* HomeContext.swift in Sources */,
 				OBJ_875 /* configure.swift in Sources */,
 				4B45A5E921B435D700C003CF /* APIProtocol.swift in Sources */,
 				OBJ_876 /* routes.swift in Sources */,

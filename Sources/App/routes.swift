@@ -12,7 +12,12 @@ public func routes(_ router: Router) throws {
             return try req.view().render("index")
         }
         
-        return try req.view().render("index", ["videos": videos])
+        guard let conferences = apiClient.getFeaturedConferences() else {
+            return try req.view().render("index")
+        }
+        
+        let context = HomeContext.init(videos: videos, conferences: conferences)
+        return try req.view().render("index", context)
     }
     
     router.get("speakers") { req -> EventLoopFuture<View> in
