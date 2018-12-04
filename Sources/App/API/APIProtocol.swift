@@ -22,4 +22,5 @@ protocol APIProtocol {
     func getConference(shortUrl: String) -> Document?
     func getConferenceVideos(conferenceId: Primitive) -> Array<Document>?
 
+    func getTagVideos(tag: String) -> Array<Document>?
 }

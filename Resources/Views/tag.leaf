@@ -8,6 +8,11 @@
 <hr>
 </div>
 </div>
+
+#embed("videosSection")
+
+#embed("footer")
+
 }
 
 #embed("base")

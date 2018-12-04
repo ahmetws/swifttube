@@ -80,7 +80,14 @@ public func routes(_ router: Router) throws {
         return try req.view().render("speaker", context)
     }
     
-    router.get("tag", String.parameter) { req in
-        return try req.view().render("tag", ["tag": req.parameters.next(String.self)])
+    router.get("tag", String.parameter) { req -> EventLoopFuture<View> in
+        let value = try req.parameters.next(String.self)
+        
+        guard let videos = apiClient.getTagVideos(tag: value) else {
+            return try req.view().render("index")
+        }
+        
+        let context = TagContext.init(videos: videos, tag: value)
+        return try req.view().render("tag", context)
     }
 }
