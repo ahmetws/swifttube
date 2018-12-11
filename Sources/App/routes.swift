@@ -33,7 +33,8 @@ public func routes(_ router: Router) throws {
             return try req.view().render("index")
         }
         
-        return try req.view().render("videos", ["videos": videos])
+        let context = VideoContext.init(videos: videos)
+        return try req.view().render("videos", context)
     }
     
     router.get("conferences") { req -> EventLoopFuture<View> in

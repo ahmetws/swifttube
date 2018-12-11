@@ -27,6 +27,8 @@
 		4B45A5EE21B5BE9800C003CF /* SpeakerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B45A5ED21B5BE9800C003CF /* SpeakerContext.swift */; };
 		4B45A5F021B5DA7000C003CF /* TagContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B45A5EF21B5DA7000C003CF /* TagContext.swift */; };
 		4B45A5F221B746A000C003CF /* HomeContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B45A5F121B746A000C003CF /* HomeContext.swift */; };
+		4B45A5F621B75DB200C003CF /* VideoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B45A5F521B75DB200C003CF /* VideoContext.swift */; };
+		4B45A5FA21C0655300C003CF /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B45A5F921C0655300C003CF /* Video.swift */; };
 		OBJ_1024 /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* AppTests.swift */; };
 		OBJ_1026 /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swifttube::App::Product" /* App.framework */; };
 		OBJ_1027 /* MongoKitten.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "MongoKitten::MongoKitten::Product" /* MongoKitten.framework */; };
@@ -4685,6 +4687,8 @@
 		4B45A5ED21B5BE9800C003CF /* SpeakerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerContext.swift; sourceTree = "<group>"; };
 		4B45A5EF21B5DA7000C003CF /* TagContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagContext.swift; sourceTree = "<group>"; };
 		4B45A5F121B746A000C003CF /* HomeContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContext.swift; sourceTree = "<group>"; };
+		4B45A5F521B75DB200C003CF /* VideoContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoContext.swift; sourceTree = "<group>"; };
+		4B45A5F921C0655300C003CF /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		"BSON::BSON::Product" /* BSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Cheetah::Cheetah::Product" /* Cheetah.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cheetah.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Console::Command::Product" /* Command.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Command.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -6227,14 +6231,32 @@
 		4B0B261A21B360C7000E4E87 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				4B45A5F821C0654900C003CF /* Model */,
 				4B0B261B21B360C7000E4E87 /* APIProtocol.swift */,
 				4B0B261D21B3615E000E4E87 /* APIClient.swift */,
+				4B45A5F721C0653A00C003CF /* Context */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		4B45A5F721C0653A00C003CF /* Context */ = {
+			isa = PBXGroup;
+			children = (
 				4B45A5EB21B4C52700C003CF /* ConferenceContext.swift */,
 				4B45A5ED21B5BE9800C003CF /* SpeakerContext.swift */,
 				4B45A5EF21B5DA7000C003CF /* TagContext.swift */,
+				4B45A5F521B75DB200C003CF /* VideoContext.swift */,
 				4B45A5F121B746A000C003CF /* HomeContext.swift */,
 			);
-			path = API;
+			path = Context;
+			sourceTree = "<group>";
+		};
+		4B45A5F821C0654900C003CF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4B45A5F921C0655300C003CF /* Video.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		OBJ_10 /* App */ = {
@@ -11320,10 +11342,12 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_873 /* app.swift in Sources */,
+				4B45A5FA21C0655300C003CF /* Video.swift in Sources */,
 				OBJ_874 /* boot.swift in Sources */,
 				4B45A5F221B746A000C003CF /* HomeContext.swift in Sources */,
 				OBJ_875 /* configure.swift in Sources */,
 				4B45A5E921B435D700C003CF /* APIProtocol.swift in Sources */,
+				4B45A5F621B75DB200C003CF /* VideoContext.swift in Sources */,
 				OBJ_876 /* routes.swift in Sources */,
 				4B45A5EA21B435DD00C003CF /* APIClient.swift in Sources */,
 				4B45A5EC21B4C52700C003CF /* ConferenceContext.swift in Sources */,

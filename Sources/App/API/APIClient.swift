@@ -21,12 +21,18 @@ class APIClient: APIProtocol {
         }
     }
     
-    func getVideos() -> Array<Document>? {
+    func getVideos() -> Array<Video>? {
         guard let database = database else { return nil }
         
-        guard let videos = try? Array(database["videos"].find()) else {
-            return nil
-        }
+        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
+        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
+
+        let pipe = AggregationPipeline(arrayLiteral: lookupConferences, lookupSpeakers)
+        
+        let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
+            return try BSONDecoder().decode(Video.self, from: document)
+        })
+        
         return videos
     }
     
