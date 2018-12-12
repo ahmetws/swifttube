@@ -4,17 +4,25 @@
 </div>
 
 <div class="row align-middle align-items-center justify-content-around ml-4 mr-4">
-
 #for(video in videos) {
-<div class="col-sm card video mr-1">
+<div class="col-sm-3 card video mr-1">
 <img class="card-img-top" src="#(video.image)" alt="#(video.title)">
 <div class="card-body">
 <a href="/video/#(video.shortUrl)">
 <h5 class="card-title">#(video.title)</h5>
 </a>
-<p class="card-subtitle">Swift & Fika 2018</p>
-<p class="card-text">John Sundell</p>
+#for(conference in video.conferencesArray) {
+<a href="/conference/#(conference.shortname)">
+<p class="card-subtitle">#(conference.fullname)</p>
+</a>
+}
+#for(speaker in video.speakersArray) {
+<a href="/speaker/#(speaker.shortname)">
+<p class="card-text">#(speaker.fullname)</p>
+</a>
+}
 </div>
 </div>
 }
+
 </div>

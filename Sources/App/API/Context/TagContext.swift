@@ -10,6 +10,6 @@ import MongoKitten
 import Vapor
 
 struct TagContext: Content {
-    var videos: [Document]
+    var videos: [Video]
     var tag: String
 }

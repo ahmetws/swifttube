@@ -10,6 +10,6 @@ import MongoKitten
 import Vapor
 
 struct SpeakerContext: Content {
-    var videos: [Document]
+    var videos: [Video]
     var speaker: Document
 }

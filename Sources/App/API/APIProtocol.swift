@@ -11,17 +11,17 @@ import MongoKitten
 protocol APIProtocol {
     
     func getVideos() -> Array<Video>?
-    func getFeaturedVideos() -> Array<Document>?
+    func getFeaturedVideos() -> Array<Video>?
     func getVideo(shortUrl: String) -> Document?
     
     func getSpeakers() -> Array<Document>?
     func getSpeaker(shortUrl: String) -> Document?
-    func getSpeakerVideos(speakerId: Primitive) -> Array<Document>?
+    func getSpeakerVideos(speakerId: Primitive) -> Array<Video>?
 
     func getConferences() -> Array<Document>?
     func getFeaturedConferences() -> Array<Document>?
     func getConference(shortUrl: String) -> Document?
-    func getConferenceVideos(conferenceId: Primitive) -> Array<Document>?
+    func getConferenceVideos(conferenceId: Primitive) -> Array<Video>?
 
-    func getTagVideos(tag: String) -> Array<Document>?
+    func getTagVideos(tag: String) -> Array<Video>?
 }

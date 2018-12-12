@@ -8,7 +8,7 @@
 <div class="row align-middle align-items-center justify-content-around ml-4 mr-4">
 
 #for(speaker in speakers) {
-<div class="col-sm-5 card video align-items-center mr-1">
+<div class="col-sm-3 card video align-items-center mr-1">
     <img class="card-img-top roundedImage" src="#(speaker.image)" alt="#(speaker.fullname)">
     <div class="card-body">
         <a href="/speaker/#(speaker.shortname)">
