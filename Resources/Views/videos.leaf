@@ -7,7 +7,7 @@
 
 <div class="row align-middle align-items-center justify-content-around ml-4 mr-4">
 #for(video in videos) {
-<div class="col-sm card video mr-1">
+<div class="col-sm-3 card video mr-1">
     <img class="card-img-top" src="#(video.image)" alt="#(video.title)">
         <div class="card-body">
             <a href="/video/#(video.shortUrl)">

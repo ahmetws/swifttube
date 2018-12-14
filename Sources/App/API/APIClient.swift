@@ -88,7 +88,9 @@ class APIClient: APIProtocol {
         
         let query: Query = [
             "users": [
-                speakerId
+                "$elemMatch": [
+                    "$eq": speakerId
+                ]
             ]
         ]
         let matchQuery = AggregationPipeline.Stage.match(query)
@@ -151,7 +153,9 @@ class APIClient: APIProtocol {
         
         let query: Query = [
             "tags": [
-                tag
+                "$elemMatch": [
+                    "$eq": tag
+                ]
             ]
         ]
         let matchQuery = AggregationPipeline.Stage.match(query)
