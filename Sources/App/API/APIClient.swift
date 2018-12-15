@@ -42,8 +42,9 @@ class APIClient: APIProtocol {
         let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
         let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
         let matchFeatured = AggregationPipeline.Stage.match("featured" == true)
+        let limitStage = AggregationPipeline.Stage.limit(9)
         
-        let pipe = AggregationPipeline(arrayLiteral: matchFeatured, lookupConferences, lookupSpeakers)
+        let pipe = AggregationPipeline(arrayLiteral: matchFeatured, lookupConferences, lookupSpeakers, limitStage)
         
         let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
@@ -115,7 +116,15 @@ class APIClient: APIProtocol {
     func getFeaturedConferences() -> Array<Document>? {
         guard let database = database else { return nil }
         
-        guard let conferences = try? Array(database["conferences"].find("featured" == true)) else {
+        let query: Query = [
+            "featured": true,
+        ]
+
+        let matchQuery = AggregationPipeline.Stage.match(query)
+        let limitStage = AggregationPipeline.Stage.limit(6)
+        let pipe = AggregationPipeline(arrayLiteral: matchQuery, limitStage)
+
+        guard let conferences = try? Array(database["conferences"].aggregate(pipe).makeIterator()) else {
             return nil
         }
         return conferences
