@@ -1,13 +1,18 @@
 #set("content") {
-<div class="container mt-3 mb-2">
-    <div class="row bg-light mt-1 ml-4 mr-4 p-5">
 
-    <p class="header-text mt-4">
-        #(conference.fullname)
-    </p>
-    <hr>
-    </div>
+<div class="container speakers">
+    <section>
+        <div class="row">
+            <div class="col-sm">
+                <div class="section-header-container">
+                    <h2>#(conference.fullname)
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
+
 
 #embed("videosSection")
 

@@ -1,60 +1,57 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/style.css"/>
-<title>Swift Tube</title>
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,700&subset=latin-ext" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:500&subset=latin-ext" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/_bootstrap-grid.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>Swift Tube</title>
 
 </head>
 <body>
 
+<nav class="navbar">
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light add-border-bottom pb-2 ml-4 mr-4">
+        <div class="navbar-content">
             <a class="navbar-brand" href="/">
-                <img src="/img/logo.png" width="164" height="50" alt="">
-                    <span class="navbar-text">
-                        Beta
-                    </span>
-                    </a>
-            
-            <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-                data-target="#navbarNav" data-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/videos">Videos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/conferences">Conferences</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/speakers">Speakers</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                <img src="/img/logo.png" width="164" height="50" alt=""/>
+            </a>
+
+            <ul class="links text-grey-700">
+                <li class="nav-item">
+                    <a class="nav-link" href="/videos">Videos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/conferences">Conferences</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/speakers">Speakers</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    
-#get(content)
+</nav>
+
+<div class="content">
+    #get(content)
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-crossorigin="anonymous"></script>
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-crossorigin="anonymous"></script>
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </body>
 </html>

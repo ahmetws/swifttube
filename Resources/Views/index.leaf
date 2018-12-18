@@ -2,31 +2,39 @@
 
 #embed("featuredConferences")
 
-<div class="container mt-3 pt-2 pb-2 pl-3 pr-3">
-<div class="row alert alert-secondary align-middle align-items-center justify-content-around ml-4 mr-4">
-<!-- Begin Mailchimp Signup Form -->
-<div class="col-sm-7" id="mc_embed_signup">
-<form action="https://gmail.us7.list-manage.com/subscribe/post?u=69b94e8cc3454a591735af579&amp;id=d7a0b6839e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline validate" target="_blank" novalidate>
+<div class="container">
+    <div class="row">
 
-<div class="form-group header-text text-right">
-Subscribe to our mail list!
+        <!-- Begin Mailchimp Signup Form -->
+        <div class="col-sm" id="mc_embed_signup">
+            <div class="form-container">
+                <form action="https://gmail.us7.list-manage.com/subscribe/post?u=69b94e8cc3454a591735af579&amp;id=d7a0b6839e"
+                      method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                      class="" target="_blank" novalidate>
+
+                    <div class="subscribe-message">
+                        Subscribe to our mail list!
+                    </div>
+
+                    <div class="input-container" id="mc_embed_signup_scroll">
+                        <input class="text" type="email" value="" name="EMAIL" id="mce-EMAIL"
+                               placeholder="email address" required>
+
+                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input type="text" name="b_69b94e8cc3454a591735af579_d7a0b6839e" tabindex="-1" value="">
+                        </div>
+
+                        <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                               class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- End mc_embed_signup -->
+    </div>
 </div>
 
-<div class="form-group ml-3" id="mc_embed_signup_scroll">
-<input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="email address" required>
-<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-<div style="position: absolute; left: -5000px;" aria-hidden="true">
-<input type="text" name="b_69b94e8cc3454a591735af579_d7a0b6839e" tabindex="-1" value="">
-</div>
-<div class="form-group ml-1">
-<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary">
-</div>
-</div>
-</form>
-</div>
-<!--End mc_embed_signup-->
-</div>
-</div>
 
 #embed("videosSection")
 
@@ -36,4 +44,4 @@ Subscribe to our mail list!
 
 }
 
-#embed("base")
+<!--#embed("base")-->

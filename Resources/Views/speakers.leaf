@@ -1,28 +1,30 @@
 #set("content") {
 
-<div class="container mt-1 pt-2 pb-2 pl-3 pr-3">
-<div class="row ml-4 mr-4 pb-1 mb-3">
-<div class="header-text">Speakers</div>
-</div>
+<div class="container speakers">
+    <section>
+        <div class="row">
+            <div class="col-sm">
+                <div class="section-header-container">
+                    <h2>Speakers</h2>
+                </div>
+            </div>
+        </div>
 
-<div class="row align-middle align-items-center justify-content-around ml-4 mr-4">
-
-#for(speaker in speakers) {
-<div class="col-sm-3 card video align-items-center mr-1">
-    <img class="card-img-top roundedImage" src="#(speaker.image)" alt="#(speaker.fullname)">
-    <div class="card-body">
-        <a href="/speaker/#(speaker.shortname)">
-            <h5 class="card-title">#(speaker.fullname)</h5>
-        </a>
-    </div>
-</div>
-}
-</div>
-
-<div class="container mt-3 pt-2 pb-2 pl-3 pr-3">
-    <div class="row align-middle align-items-center justify-content-around ml-4 mr-4 mb-4">
-        swifttube.co 2018
-    </div>
+        <div class="row">
+            #for(speaker in speakers) {
+            <div class="col-sm col-md-4">
+                <a href="/speaker/#(speaker.shortname)">
+                    <div class="speaker-cell">
+                        <div class="aspect">
+                            <img src="#(speaker.image)" alt="#(speaker.fullname)">
+                            <div class="text"><h2>#(speaker.fullname)</h2></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            }
+        </div>
+    </section>
 </div>
 }
 

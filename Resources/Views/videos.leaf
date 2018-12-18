@@ -1,40 +1,63 @@
 #set("content") {
-
-<div class="container mt-1 pt-2 pb-2 pl-3 pr-3">
-<div class="row ml-4 mr-4 pb-1 mb-3 add-border-bottom">
-<div class="header-text">Videos</div>
-</div>
-
-<div class="row align-middle align-items-center justify-content-around ml-4 mr-4">
-#for(video in videos) {
-<div class="col-sm-3 card video mr-1">
-<a href="/video/#(video.shortUrl)">
-    <img class="card-img-top" src="#(video.image)" alt="#(video.title)">
-</a>
-        <div class="card-body">
-            <a href="/video/#(video.shortUrl)">
-                <h5 class="card-title">#(video.title)</h5>
-            </a>
-#for(conference in video.conferencesArray) {
-    <a href="/conference/#(conference.shortname)">
-            <p class="card-subtitle">#(conference.fullname)</p>
-    </a>
-}
-#for(speaker in video.speakersArray) {
-    <a href="/speaker/#(speaker.shortname)">
-            <p class="card-text">#(speaker.fullname)</p>
-    </a>
-}
+<div class="container">
+    <section>
+        <div class="row">
+            <div class="col-sm">
+                <div class="section-header-container">
+                    <h2>Videos</h2>
+                </div>
+            </div>
         </div>
-</div>
-}
 
-</div>
+        <div class="row">
 
-<div class="container mt-3 pt-2 pb-2 pl-3 pr-3">
-<div class="row align-middle align-items-center justify-content-around ml-4 mr-4 mb-4">
-swifttube.co 2018
-</div>
+            #for(video in videos) {
+            <div class="col-sm col-md-4">
+                <div class="video-card">
+                    <div class="card-cover">
+                        <div class="card-cover-aspect">
+                            <a href="/video/#(video.shortUrl)">
+                                <img src="#(video.image)" alt="#(video.title)">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <a href="/video/#(video.shortUrl)">
+                            <h3 class="card-title">#(video.title)</h3>
+                        </a>
+
+                        <div class="conference-names">
+                            #for(conference in video.conferencesArray) {
+                            <a href="/conference/#(conference.shortname)">
+                                <div class="card-subtitle">
+                                    #(conference.fullname)
+                                    <!--<span class="date text-grey-500">
+                                        15 Sep 2018
+                                    </span>-->
+                                </div>
+                            </a>
+                            }
+                        </div>
+
+                        <div class="user-list">
+                            #for(speaker in video.speakersArray) {
+                            <a href="/speaker/#(speaker.shortname)">
+                                <div class="user-info">
+                                    <div class="avatar">
+                                        <img src="#(speaker.image)" alt="#(video.title)">
+                                    </div>
+
+                                    <div class="card-text">#(speaker.fullname)</div>
+                                </div>
+                            </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </section>
 </div>
 }
 

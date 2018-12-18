@@ -1,14 +1,28 @@
-<div class="container mt-3 pt-2 pb-2 pl-3 pr-3">
-    <div class="row ml-4 mr-4">
-        <div class="header-text">Featured Conferences</div>
-    </div>
-    <div class="row pb-2 align-items-center justify-content-around">
-        #for(conference in conferences) {
-        <div class="col-sm mt-md-3 mb-3 conferences text-center">
-<a href="/conference/#(conference.shortname)">
-            <img class="conference-image rectangle" src="#(conference.image)" alt="#(conference.fullname)">
-</a>
+<div class="container conferences">
+    <section>
+        <div class="row">
+            <div class="col-sm">
+                <div class="section-header-container">
+                    <h2>Featured Conferences</h2>
+                    <a href="/conferences">See all conferences</a>
+                </div>
+            </div>
         </div>
-        }
-    </div>
+
+        <div class="row">
+
+            #for(conference in conferences) {
+            <div class="col-sm col-md-4">
+                <a href="/conference/#(conference.shortname)">
+                    <div class="conference-cell">
+                        <div class="aspect">
+                            <!--<div class="text">Some text</div>-->
+                            <img src="#(conference.image)" alt="#(conference.fullname)"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            }
+        </div>
+    </section>
 </div>
