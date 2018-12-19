@@ -21,11 +21,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <p class="header-text mt-4">
-            #(video.title)
-        </p>
-    </div>
 </div>
 
 #embed("footer")
