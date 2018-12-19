@@ -26,6 +26,9 @@
         </div>
     </section>
 </div>
+
+#embed("footer")
+
 }
 
 #embed("base")

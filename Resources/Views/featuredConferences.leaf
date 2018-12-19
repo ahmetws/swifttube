@@ -16,7 +16,7 @@
                 <a href="/conference/#(conference.shortname)">
                     <div class="conference-cell">
                         <div class="aspect">
-                            <!--<div class="text">Some text</div>-->
+                            <!-- <div class="text">Some text</div> -->
                             <img src="#(conference.image)" alt="#(conference.fullname)"/>
                         </div>
                     </div>

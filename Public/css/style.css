@@ -266,6 +266,16 @@ section h2 {
     background-color: #007bff;
     border-color: #007bff;
 }
+/* video detail */
+
+.video-detail-container {
+    border: 1px solid #E0E0E0;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #ffffff;
+    margin: 1rem 0;
+    width: 100%;
+}
 
 /* video list */
 

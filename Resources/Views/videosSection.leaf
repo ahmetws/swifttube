@@ -31,9 +31,9 @@
                             <a href="/conference/#(conference.shortname)">
                                 <div class="card-subtitle">
                                     #(conference.fullname)
-                                    <!--<span class="date text-grey-500">
+                                    <!-- <span class="date text-grey-500">
                                         15 Sep 2018
-                                    </span>-->
+                                    </span> -->
                                 </div>
                             </a>
                             }

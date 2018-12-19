@@ -1,21 +1,34 @@
 #set("content") {
 
-<div class="container mt-3 mb-2">
-<div class="row bg-light mt-1 ml-4 mr-4 p-5">
+<div class="container">
+    <section>
+        <div class="row">
+            <div class="col-sm">
+                <div class="section-header-container">
+                    <h2> #(video.title)
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
-<div class="embed-responsive embed-responsive-16by9">
-<iframe class="embed-responsive-item" src="#(video.url)" allowfullscreen></iframe>
+<div class="container speakers">
+    <div class="row">
+        <div class="video-detail-container">
+            <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="#(video.url)" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <p class="header-text mt-4">
+            #(video.title)
+        </p>
+    </div>
 </div>
-<p class="header-text mt-4">
-#(video.title)
-</p>
-<hr>
-<p class="header-text mt-4">
-...
-</p>
 
-</div>
-</div>
+#embed("footer")
 
 }
 
