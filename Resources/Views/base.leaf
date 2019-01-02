@@ -4,20 +4,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:image" content="https://www.swifttube.co/img/swifttube_logo.png">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:title" content="Swift Tube">
-    <meta property="og:description" content="Swifttube.co 2019 Curated iOS conference videos">
-    <meta property="og:url" content="https://www.swifttube.co">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@swifttubeco">
-    <meta property="og:type" content="website">
-    <meta property="og:image:alt" content="Swifttube.co">
-    <meta property="twitter:image:alt" content="SwiftTube - Curated iOS conference videos">
 
-    <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+    #get("head")
+
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,700&subset=latin-ext" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:500&subset=latin-ext" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/_bootstrap-grid.min.css"/>

@@ -1,3 +1,17 @@
+#set("head") {
+<meta property="og:image" content="http://www.swifttube.co/img/swifttube_logo.png">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta property="og:title" content="Swift Tube">
+<meta property="og:description" content="Swifttube.co 2019 Curated iOS conference videos">
+<meta property="og:url" content="https://www.swifttube.co">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@swifttubeco">
+<meta property="og:type" content="website">
+<meta property="og:image:alt" content="Swifttube.co">
+<meta property="twitter:image:alt" content="SwiftTube - Curated iOS conference videos">
+}
+
 #set("content") {
 
 #embed("featuredConferences")

@@ -1,3 +1,19 @@
+#set("head") {
+<title>#(video.title) - SwiftTube</title>
+
+<meta name="description" content="#(video.title)">
+
+<meta name="twitter:widgets:csp" content="on">
+<meta property="og:url" content="http://www.swifttube.co/video/#(video.shortUrl)">
+<meta property="og:title" content="#(video.title)">
+<meta property="og:type" content="video.movie">
+<meta property="og:site_name" content="SwiftTube">
+<meta property="article:author" content="#(site_uri)blog/authors/#(author.username)/">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="#(video.image)">
+<meta name="twitter:site" content="@swifttubeco">
+}
+
 #set("content") {
 
 <div class="container">
