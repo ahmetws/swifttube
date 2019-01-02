@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    #get("head")
+    #get(head)
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,700&subset=latin-ext" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:500&subset=latin-ext" rel="stylesheet"/>
