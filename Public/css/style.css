@@ -51,6 +51,20 @@ section h2 {
     padding: 1rem 0;
 }
 
+.section-header-container .user-info {
+    display: flex;
+    margin-right: 1rem;
+    align-items: center;
+}
+
+.section-header-container .user-info img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.5rem;
+}
+
 .add-border {
     border: 1px solid #e8e8e8;
 }

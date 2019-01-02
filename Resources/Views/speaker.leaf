@@ -5,8 +5,18 @@
         <div class="row">
             <div class="col-sm">
                 <div class="section-header-container">
-                    <h2>#(speaker.fullname)
-                    </h2>
+                    <div class="user-info">
+                        <div class="avatar">
+                            <img src="#(speaker.image)" alt="#(speaker.fullname)">
+                        </div>
+
+                        <div class="card-text"><h2>#(speaker.fullname)</h2></div>
+                    </div>
+                        #if(speaker.twitter) {
+                        <a href="https://twitter.com/#(speaker.twitter)">
+                            <img src="/img/twitter.png" style="width:36px; height:36px;" />
+                        </a>
+                        }
                 </div>
             </div>
         </div>
