@@ -7,11 +7,13 @@
 
 import Foundation
 import MongoKitten
+import Vapor
 
-final class Video: Codable {
+final class Video: Content, Codable {
     var image: String?
     var title: String?
     var shortUrl: String?
+    var url: String?
     var conferencesArray: [Document]?
     var speakersArray: [Document]?
 

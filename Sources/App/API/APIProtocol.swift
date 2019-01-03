@@ -12,7 +12,7 @@ protocol APIProtocol {
     
     func getVideos() -> Array<Video>?
     func getFeaturedVideos() -> Array<Video>?
-    func getVideo(shortUrl: String) -> Document?
+    func getVideo(shortUrl: String) -> Video?
     
     func getSpeakers() -> Array<Speaker>?
     func getSpeaker(shortUrl: String) -> Document?

@@ -19,13 +19,41 @@
 <div class="container">
     <section>
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm-12">
                 <div class="section-header-container">
                     <h2> #(video.title)
                     </h2>
                 </div>
             </div>
+            <div class="col-sm-12">
+                <div class="section-header-container">
+                    <div class="card-content">
+                        <div class="user-info">
+                            #for(speaker in video.speakersArray) {
+                            <a href="/speaker/#(speaker.shortname)">
+                                <div class="user-info">
+                                    <div class="avatar">
+                                        <img src="#(speaker.image)" alt="#(video.title)">
+                                    </div>
+
+                                    <div class="card-text">#(speaker.fullname)</div>
+                                </div>
+                            </a>
+                            }
+                            
+                            #for(conference in video.conferencesArray) {
+                            <a href="/conference/#(conference.shortname)">
+                                <div class="card-subtitle" style="margin-left: 20px;">
+                                    #(conference.fullname)
+                                </div>
+                            </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </section>
 </div>
 

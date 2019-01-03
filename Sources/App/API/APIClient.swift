@@ -53,13 +53,20 @@ class APIClient: APIProtocol {
         return videos
     }
     
-    func getVideo(shortUrl: String) -> Document? {
+    func getVideo(shortUrl: String) -> Video? {
         guard let database = database else { return nil }
 
-        guard let video = try? database["videos"].findOne("shortUrl" == shortUrl) else {
-            return nil
-        }
-        return video
+        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
+        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
+        let matchStage = AggregationPipeline.Stage.match("shortUrl" == shortUrl)
+        
+        let pipe = AggregationPipeline(arrayLiteral: matchStage, lookupConferences, lookupSpeakers)
+        
+        let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
+            return try BSONDecoder().decode(Video.self, from: document)
+        })
+
+        return videos?.first
     }
     
     //MARK: - Speakers
