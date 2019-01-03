@@ -1,11 +1,26 @@
 import Leaf
 import Vapor
+import Paginator
 
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
     /// Register providers first
+
     try services.register(LeafProvider())
 
+    services.register(OffsetPaginatorConfig(
+        perPage: 18,
+        defaultPage: 1
+    ))
+    
+    services.register { _ -> LeafTagConfig in
+        var tags = LeafTagConfig.default()
+        tags.use([
+            "offsetPaginator": OffsetPaginatorTag(templatePath: "Paginator/offsetpaginator")
+            ])
+        return tags
+    }
+    
     /// Register routes to the router
     let router = EngineRouter.default()
     try routes(router)

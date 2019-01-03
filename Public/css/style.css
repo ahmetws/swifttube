@@ -431,3 +431,45 @@ video {
 .embed-responsive-16by9 {
     padding-bottom: 56.25%;
 }
+
+/* pagination */
+
+.paginator {
+    margin: 1rem 0;
+}
+
+.pagination {
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+}
+
+.page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+
+.page-item {
+    border: 1px solid #E0E0E0;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    background: #ffffff;
+}
+
+.active .page-link {
+    z-index: 1;
+    color: #0e8fff;
+    background-color: #ffffff;
+}
+
+.disabled .page-link {
+    color: #E0E0E0;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #ffffff;
+}

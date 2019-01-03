@@ -1,5 +1,6 @@
 import Vapor
 import MongoKitten
+import Paginator
 
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
@@ -28,13 +29,28 @@ public func routes(_ router: Router) throws {
         return try req.view().render("speakers", ["speakers": speakers])
     }
     
-    router.get("videos") { req -> EventLoopFuture<View> in
-        guard let videos = apiClient.getVideos() else {
-            return try req.view().render("index")
-        }
+//    router.get("videos") { req -> EventLoopFuture<View> in
+//        guard let videos = apiClient.getVideos() else {
+//            return try req.view().render("index")
+//        }
+//        
+//        let context = VideoContext.init(videos: videos)
+//        return try req.view().render("videos", context)
+//    }
+    
+    router.get("videos") { (req: Request) -> EventLoopFuture<Response> in
         
-        let context = VideoContext.init(videos: videos)
-        return try req.view().render("videos", context)
+        let videos = apiClient.getVideos() ?? []
+        
+        let paginator: Future<OffsetPaginator<Video>> = try videos.paginate(for: req)
+        return paginator.flatMap(to: Response.self) { paginator in
+            return try req.view().render(
+                "videos",
+                VideoContext.init(videos: paginator.data ?? []),
+                userInfo: try paginator.userInfo()
+                )
+                .encode(for: req)
+        }
     }
     
     router.get("conferences") { req -> EventLoopFuture<View> in

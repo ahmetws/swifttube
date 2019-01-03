@@ -57,6 +57,9 @@
             </div>
             }
         </div>
+
+        #offsetPaginator()
+
     </section>
 </div>
 }
