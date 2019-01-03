@@ -14,7 +14,7 @@ protocol APIProtocol {
     func getFeaturedVideos() -> Array<Video>?
     func getVideo(shortUrl: String) -> Document?
     
-    func getSpeakers() -> Array<Document>?
+    func getSpeakers() -> Array<Speaker>?
     func getSpeaker(shortUrl: String) -> Document?
     func getSpeakerVideos(speakerId: Primitive) -> Array<Video>?
 

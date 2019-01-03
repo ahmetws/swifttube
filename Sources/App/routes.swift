@@ -29,14 +29,19 @@ public func routes(_ router: Router) throws {
         return try req.view().render("speakers", ["speakers": speakers])
     }
     
-//    router.get("videos") { req -> EventLoopFuture<View> in
-//        guard let videos = apiClient.getVideos() else {
-//            return try req.view().render("index")
-//        }
-//        
-//        let context = VideoContext.init(videos: videos)
-//        return try req.view().render("videos", context)
-//    }
+    router.get("speakers") { (req: Request) -> EventLoopFuture<Response> in
+        let speakers = apiClient.getSpeakers() ?? []
+        
+        let paginator: Future<OffsetPaginator<Speaker>> = try speakers.paginate(for: req)
+        return paginator.flatMap(to: Response.self) { paginator in
+            return try req.view().render(
+                "speakers",
+                SpeakersContext(speakers: paginator.data ?? []),
+                userInfo: try paginator.userInfo()
+                )
+                .encode(for: req)
+        }
+    }
     
     router.get("videos") { (req: Request) -> EventLoopFuture<Response> in
         
