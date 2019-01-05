@@ -9,6 +9,12 @@ import Foundation
 import MongoKitten
 import Vapor
 
+struct VideoDetailContext: Content, Encodable {
+    var video: Video
+    var tags: [String]
+}
+
+
 struct VideoContext: Content, Encodable {
     var videos: [Video]
 }

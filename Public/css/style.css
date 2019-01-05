@@ -237,6 +237,13 @@ section h2 {
     justify-content: center;
     align-items: center;
     margin-bottom: 0;
+    padding: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .form-container .input-container {
+        margin: 0 -1rem;
+    }
 }
 
 .form-container .subscribe-message {
@@ -283,12 +290,46 @@ section h2 {
 /* video detail */
 
 .video-detail-container {
-    border: 1px solid #E0E0E0;
-    padding: 1rem;
-    border-radius: 8px;
-    background: #ffffff;
     margin: 1rem 0;
-    width: 100%;
+}
+
+.video-detail-container h2 {
+    padding: 1rem;
+    margin: 0;
+}
+
+.video-detail-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 1rem;
+}
+
+.video-detail-card-footer .user-info {
+    display: flex;
+    margin-right: 1rem;
+    align-items: center;
+}
+
+.video-detail-card-footer .user-info img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.5rem;
+}
+
+.video-detail-card-footer .card-content {
+    display: flex;
+}
+
+.video-detail-card-footer .conference-info {
+    flex: 1;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: bold;
 }
 
 /* video list */

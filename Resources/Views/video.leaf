@@ -16,53 +16,51 @@
 
 #set("content") {
 
-<div class="container">
-    <section>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="section-header-container">
-                    <h2> #(video.title)
-                    </h2>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="section-header-container">
-                    <div class="card-content">
-                        <div class="user-info">
-                            #for(speaker in video.speakersArray) {
-                            <a href="/speaker/#(speaker.shortname)">
-                                <div class="user-info">
-                                    <div class="avatar">
-                                        <img src="#(speaker.image)" alt="#(video.title)">
-                                    </div>
+<div class="container speakers">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="video-detail-container video-card">
+                <h2>#(video.title)</h2>
 
-                                    <div class="card-text">#(speaker.fullname)</div>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="#(video.url)" allowfullscreen></iframe>
+                </div>
+
+                <div class="video-detail-card-footer">
+                    <div class="user-info">
+                        #for(speaker in video.speakersArray) {
+                        <a href="/speaker/#(speaker.shortname)">
+                            <div class="user-info">
+                                <div class="avatar">
+                                    <img src="#(speaker.image)" alt="#(video.title)">
                                 </div>
-                            </a>
-                            }
-                            
-                            #for(conference in video.conferencesArray) {
-                            <a href="/conference/#(conference.shortname)">
-                                <div class="card-subtitle" style="margin-left: 20px;">
-                                    #(conference.fullname)
-                                </div>
-                            </a>
-                            }
-                        </div>
+
+                                <div class="card-text">#(speaker.fullname)</div>
+                            </div>
+                        </a>
+                        }
+                    </div>
+                    <div class="conference-info">
+                        #for(conference in video.conferencesArray) {
+                        <a href="/conference/#(conference.shortname)">
+                            <div class="card-subtitle" style="margin-left: 20px;">
+                                #(conference.fullname)
+                            </div>
+                        </a>
+                        }
                     </div>
                 </div>
             </div>
         </div>
-
-    </section>
+    </div>
 </div>
 
-<div class="container speakers">
+<div class="container featured-tags-container">
     <div class="row">
-        <div class="video-detail-container">
-            <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="#(video.url)" allowfullscreen></iframe>
-            </div>
+        <div class="col-sm">
+            #for(tag in tags) {
+            <a class="tag" href="/tag/#(tag)">##(tag)</a>
+            }
         </div>
     </div>
 </div>

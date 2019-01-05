@@ -26,7 +26,7 @@
                       method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
                       class="" target="_blank" novalidate>
 
-                    <div class="subscribe-message">
+                    <div class="subscribe-message hide-on-small-and-down">
                         Subscribe to our mail list!
                     </div>
 

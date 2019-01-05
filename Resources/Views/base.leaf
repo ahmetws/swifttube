@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:500&subset=latin-ext" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/_bootstrap-grid.min.css"/>
     <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/media.css"/>
     <title>Swift Tube</title>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->

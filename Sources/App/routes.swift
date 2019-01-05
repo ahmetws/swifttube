@@ -85,10 +85,16 @@ public func routes(_ router: Router) throws {
     router.get("video", String.parameter) { req -> EventLoopFuture<View> in
         let value = try req.parameters.next(String.self)
         guard let video = apiClient.getVideo(shortUrl: value) else {
-            return try req.view().render("index")
+            return try req.view().render("404")
         }
+                
+        let tags: [String] = video.tags?.arrayRepresentation.map({ value in
+            return String(describing: value)
+        }) ?? []
         
-        return try req.view().render("video", ["video": video])
+        
+        let context = VideoDetailContext(video: video, tags: tags)
+        return try req.view().render("video", context)
     }
     
     router.get("speaker", String.parameter) { req -> EventLoopFuture<View> in

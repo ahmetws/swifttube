@@ -14,6 +14,7 @@ final class Video: Content, Codable {
     var title: String?
     var shortUrl: String?
     var url: String?
+    var tags: Document?
     var conferencesArray: [Document]?
     var speakersArray: [Document]?
 
