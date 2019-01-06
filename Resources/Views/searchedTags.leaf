@@ -1,0 +1,10 @@
+<div class="container featured-tags-container">
+    <div class="row">
+        <div class="col-sm">
+            #for(tag in tags) {
+            <a class="tag" href="/tag/#(tag)">##(tag)</a>
+            }
+        </div>
+    </div>
+</div>
+

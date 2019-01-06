@@ -22,6 +22,9 @@
 
 /* Begin PBXBuildFile section */
 		4B1CEBCD21DE76B200FC6C75 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1CEBCC21DE76B200FC6C75 /* Speaker.swift */; };
+		4B5467BB21E199B500774588 /* SearchContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5467BA21E199B500774588 /* SearchContext.swift */; };
+		4B5467BE21E19A2400774588 /* SearchAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5467BD21E19A2400774588 /* SearchAPIProtocol.swift */; };
+		4B5467C021E19AD300774588 /* SearchAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5467BF21E19AD300774588 /* SearchAPIClient.swift */; };
 		OBJ_1081 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* APIClient.swift */; };
 		OBJ_1082 /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* APIProtocol.swift */; };
 		OBJ_1083 /* ConferenceContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* ConferenceContext.swift */; };
@@ -6410,6 +6413,9 @@
 
 /* Begin PBXFileReference section */
 		4B1CEBCC21DE76B200FC6C75 /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
+		4B5467BA21E199B500774588 /* SearchContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContext.swift; sourceTree = "<group>"; };
+		4B5467BD21E19A2400774588 /* SearchAPIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPIProtocol.swift; sourceTree = "<group>"; };
+		4B5467BF21E19AD300774588 /* SearchAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPIClient.swift; sourceTree = "<group>"; };
 		"Auth::Authentication::Product" /* Authentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Authentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"BSON::BSON::Product" /* BSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Cheetah::Cheetah::Product" /* Cheetah.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cheetah.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8346,6 +8352,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B5467BC21E19A0C00774588 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				4B5467BD21E19A2400774588 /* SearchAPIProtocol.swift */,
+				4B5467BF21E19AD300774588 /* SearchAPIClient.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		OBJ_10 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -8481,6 +8496,7 @@
 		OBJ_11 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				4B5467BC21E19A0C00774588 /* Search */,
 				OBJ_12 /* APIClient.swift */,
 				OBJ_13 /* APIProtocol.swift */,
 				OBJ_14 /* Context */,
@@ -8579,6 +8595,7 @@
 				OBJ_17 /* SpeakerContext.swift */,
 				OBJ_18 /* TagContext.swift */,
 				OBJ_19 /* VideoContext.swift */,
+				4B5467BA21E199B500774588 /* SearchContext.swift */,
 			);
 			path = Context;
 			sourceTree = "<group>";
@@ -9614,7 +9631,7 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -9625,7 +9642,6 @@
 				OBJ_31 /* Dependencies */,
 				OBJ_1019 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_502 /* Utilities */ = {
@@ -13186,7 +13202,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_1019 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -13298,6 +13314,9 @@
 				OBJ_1090 /* boot.swift in Sources */,
 				OBJ_1091 /* configure.swift in Sources */,
 				OBJ_1092 /* routes.swift in Sources */,
+				4B5467BB21E199B500774588 /* SearchContext.swift in Sources */,
+				4B5467BE21E19A2400774588 /* SearchAPIProtocol.swift in Sources */,
+				4B5467C021E19AD300774588 /* SearchAPIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

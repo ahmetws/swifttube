@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm">
                 <div class="section-header-container">
-                    <h2>Featured Conferences</h2>
+                    <h2>#(conferenceTitle)</h2>
                     <a href="/conferences">See all conferences</a>
                 </div>
             </div>

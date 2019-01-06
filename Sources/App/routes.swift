@@ -7,7 +7,8 @@ public func routes(_ router: Router) throws {
 
     let databaseUrl = Environment.get("DB_URL")
     let apiClient: APIProtocol = APIClient(databaseUrl: databaseUrl)
-    
+    let searchAPIClient: SearchAPIProtocol = SearchAPIClient(databaseUrl: databaseUrl)
+
     router.get { req -> EventLoopFuture<View> in
         guard let videos = apiClient.getFeaturedVideos() else {
             return try req.view().render("index")
@@ -122,5 +123,19 @@ public func routes(_ router: Router) throws {
         
         let context = TagContext.init(videos: videos, tag: value)
         return try req.view().render("tag", context)
+    }
+    
+    // MARK: - Search
+    
+    router.get("search", String.parameter) { req -> EventLoopFuture<View> in
+        
+        let searchText = try req.parameters.next(String.self)
+
+        let conferences = searchAPIClient.getSearchedConferences(searchText: searchText) ?? []
+        let videos = searchAPIClient.getSearchedVideos(searchText: searchText) ?? []
+        let tags = searchAPIClient.getSearchedTags(searchText: searchText) ?? []
+
+        let context = SearchContext(videos: videos, conferences: conferences, tags: tags)
+        return try req.view().render("search", context)
     }
 }

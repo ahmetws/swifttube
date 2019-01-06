@@ -12,6 +12,10 @@
 <meta property="twitter:image:alt" content="SwiftTube - Curated iOS conference videos">
 }
 
+#set("conferenceTitle") {
+Featured Conferences
+}
+
 #set("content") {
 
 #embed("featuredConferences")
