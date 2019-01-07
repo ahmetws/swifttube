@@ -8,7 +8,6 @@
 <meta property="og:title" content="#(video.title)">
 <meta property="og:type" content="video.movie">
 <meta property="og:site_name" content="SwiftTube">
-<meta property="article:author" content="#(site_uri)blog/authors/#(author.username)/">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="#(video.image)">
 <meta name="twitter:site" content="@swifttubeco">
@@ -20,8 +19,15 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="video-detail-container video-card">
-                <h2>#(video.title)</h2>
-
+                <div class="section-header-container" style="align-items: center;">
+                    <div class="user-info">
+                        <div class="card-text"><h2>#(video.title)</h2></div>
+                    </div>
+                    <div class="user-info">
+                        <a class="twitter-share-button" data-size="large" href="https://twitter.com/intent/tweet?text=#(twitterText)">Tweet</a>
+                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                </div>
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="#(video.url)" allowfullscreen></iframe>
                 </div>

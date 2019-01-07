@@ -93,8 +93,7 @@ public func routes(_ router: Router) throws {
             return String(describing: value)
         }) ?? []
         
-        
-        let context = VideoDetailContext(video: video, tags: tags)
+        let context = VideoDetailContext(video: video, twitterText: video.twitterText, tags: tags)
         return try req.view().render("video", context)
     }
     

@@ -11,6 +11,7 @@ import Vapor
 
 struct VideoDetailContext: Content, Encodable {
     var video: Video
+    var twitterText: String
     var tags: [String]
 }
 
