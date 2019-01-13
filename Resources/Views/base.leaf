@@ -36,7 +36,7 @@
             </a>
 
             <!-- Search form -->
-            <div class="search-container">
+            <div class="search-container hide-on-small-and-down">
                 <form action="/search" method="post" class="active-cyan">
                     <input class="text" type="text" name="searchText" placeholder="Search" aria-label="Search">
                     <i class="fas fa-search" aria-hidden="true"></i>

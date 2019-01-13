@@ -524,6 +524,7 @@ video {
 
 .search-container {
     background: #ffffff;
+    margin-left: 1rem;
 }
 
 .search-container form, .search-container .input-container {

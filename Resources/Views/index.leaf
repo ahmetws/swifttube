@@ -18,6 +18,20 @@ Featured Conferences
 
 #set("content") {
 
+<div class="container hideOnMediumAndUp">
+    <div class="row">
+        <div class="col-sm">
+            <!-- Search form -->
+            <div class="form-container">
+                <form action="/search" method="post" class="active-cyan">
+                    <input class="text" type="text" name="searchText" placeholder="Search" aria-label="Search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 #embed("featuredConferences")
 
 <div class="container">
