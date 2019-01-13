@@ -137,4 +137,15 @@ public func routes(_ router: Router) throws {
         let context = SearchContext(videos: videos, conferences: conferences, tags: tags)
         return try req.view().render("search", context)
     }
+    
+    router.post("search") { req -> EventLoopFuture<View> in
+        let searchText: String = try req.content.syncGet(at: "searchText")
+        
+        let conferences = searchAPIClient.getSearchedConferences(searchText: searchText) ?? []
+        let videos = searchAPIClient.getSearchedVideos(searchText: searchText) ?? []
+        let tags = searchAPIClient.getSearchedTags(searchText: searchText) ?? []
+        
+        let context = SearchContext(videos: videos, conferences: conferences, tags: tags)
+        return try req.view().render("search", context)
+    }
 }

@@ -9,6 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,700&subset=latin-ext" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:500&subset=latin-ext" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/_bootstrap-grid.min.css"/>
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="/css/media.css"/>
@@ -34,6 +35,14 @@
                 <img src="/img/logo.png" width="164" height="50" alt=""/>
             </a>
 
+            <!-- Search form -->
+            <div class="search-container">
+                <form action="/search" method="post" class="active-cyan">
+                    <input class="text" type="text" name="searchText" placeholder="Search" aria-label="Search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </form>
+            </div>
+            
             <ul class="links text-grey-700">
                 <li class="nav-item">
                     <a class="nav-link" href="/videos">Videos</a>
