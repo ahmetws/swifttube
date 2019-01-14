@@ -4,7 +4,7 @@
 
 </p>
 
-[Swifttube](http://swiftube.co) curates iOS conference videos in one place. Built with Server Side Swift [Vapor Framework](https://vapor.codes/) and [MongoKitten](https://github.com/OpenKitten/MongoKitten)
+[Swifttube](http://swifttube.co) curates iOS conference videos in one place. Built with Server Side Swift [Vapor Framework](https://vapor.codes/) and [MongoKitten](https://github.com/OpenKitten/MongoKitten)
 
 ⭐️ Please leave a star to support Swifttube!
 
