@@ -21,6 +21,15 @@ class SearchAPIClient: SearchAPIProtocol {
         }
     }
     
+    func getSearchedSpeakers(searchText: String) -> Array<Document>? {
+        guard let database = database else { return nil }
+        
+        let query: Query = Query.textSearch(forString: searchText)
+        
+        let speakers = try? Array(database["users"].find(query))
+        return speakers
+    }
+    
     func getSearchedConferences(searchText: String) -> Array<Document>? {
         guard let database = database else { return nil }
         

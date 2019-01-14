@@ -1,0 +1,27 @@
+<div class="container speakers">
+    <section>
+        <div class="row">
+            <div class="col-sm">
+                <div class="section-header-container">
+                    <h2>Speakers</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            #for(speaker in speakers) {
+            <div class="col-sm col-md-4">
+                <a href="/speaker/#(speaker.shortname)">
+                    <div class="speaker-cell">
+                        <div class="aspect">
+                            <img src="#(speaker.image)" alt="#(speaker.fullname)">
+                                <div class="text"><h2>#(speaker.fullname)</h2></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            }
+        </div>
+
+    </section>
+</div>

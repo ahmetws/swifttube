@@ -18,6 +18,10 @@ Conferences
 
 #set("content") {
 
+#if(count(speakers) > 0) {
+    #embed("searchedSpeakers")
+}
+
 #if(count(conferences) > 0) {
     #embed("featuredConferences")
 }
@@ -28,6 +32,18 @@ Conferences
 
 #if(count(tags) > 0) {
 #embed("searchedTags")
+}
+
+#if(!hasResult) {
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="form-container" style="text-align: center;">
+            Sorry :( No result for this query!
+            </div>
+        </div>
+    </div>
+</div>
 }
 
 #embed("footer")

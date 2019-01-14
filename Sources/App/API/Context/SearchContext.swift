@@ -12,5 +12,7 @@ import Vapor
 struct SearchContext: Content {
     var videos: [Video]
     var conferences: [Document]
+    var speakers: [Document]
     var tags: [Document]
+    var hasResult: Bool
 }

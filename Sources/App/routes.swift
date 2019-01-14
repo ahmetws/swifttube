@@ -127,25 +127,29 @@ public func routes(_ router: Router) throws {
     // MARK: - Search
     
     router.get("search", String.parameter) { req -> EventLoopFuture<View> in
-        
         let searchText = try req.parameters.next(String.self)
-
-        let conferences = searchAPIClient.getSearchedConferences(searchText: searchText) ?? []
-        let videos = searchAPIClient.getSearchedVideos(searchText: searchText) ?? []
-        let tags = searchAPIClient.getSearchedTags(searchText: searchText) ?? []
-
-        let context = SearchContext(videos: videos, conferences: conferences, tags: tags)
+        let context = getSearchContext(for: searchText)
         return try req.view().render("search", context)
     }
     
     router.post("search") { req -> EventLoopFuture<View> in
         let searchText: String = try req.content.syncGet(at: "searchText")
-        
+        let context = getSearchContext(for: searchText)
+        return try req.view().render("search", context)
+    }
+    
+    func getSearchContext(for searchText: String) -> SearchContext {
+        let speakers = searchAPIClient.getSearchedSpeakers(searchText: searchText) ?? []
         let conferences = searchAPIClient.getSearchedConferences(searchText: searchText) ?? []
         let videos = searchAPIClient.getSearchedVideos(searchText: searchText) ?? []
         let tags = searchAPIClient.getSearchedTags(searchText: searchText) ?? []
         
-        let context = SearchContext(videos: videos, conferences: conferences, tags: tags)
-        return try req.view().render("search", context)
+        var hasResult = true
+        if speakers.isEmpty && conferences.isEmpty && videos.isEmpty && tags.isEmpty  {
+            hasResult = false
+        }
+        
+        let context = SearchContext(videos: videos, conferences: conferences, speakers: speakers, tags: tags, hasResult: hasResult)
+        return context
     }
 }
