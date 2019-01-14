@@ -63,5 +63,10 @@ class SearchAPIClient: SearchAPIProtocol {
     func getSearchedTags(searchText: String) -> Array<Document>? {
         return []
     }
+    
+    func save(searchText: String) {
+        guard let database = database else { return }
+        _ = try? database["searchText"].insert(["searchText": searchText, "createdAt": Date()])
+    }
 }
 

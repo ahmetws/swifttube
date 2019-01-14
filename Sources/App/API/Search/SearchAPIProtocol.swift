@@ -13,4 +13,5 @@ protocol SearchAPIProtocol {
     func getSearchedConferences(searchText: String) -> Array<Document>?
     func getSearchedVideos(searchText: String) -> Array<Video>?
     func getSearchedTags(searchText: String) -> Array<Document>?
+    func save(searchText: String)
 }

@@ -128,12 +128,16 @@ public func routes(_ router: Router) throws {
     
     router.get("search", String.parameter) { req -> EventLoopFuture<View> in
         let searchText = try req.parameters.next(String.self)
+        searchAPIClient.save(searchText: searchText)
+        
         let context = getSearchContext(for: searchText)
         return try req.view().render("search", context)
     }
     
     router.post("search") { req -> EventLoopFuture<View> in
         let searchText: String = try req.content.syncGet(at: "searchText")
+        searchAPIClient.save(searchText: searchText)
+
         let context = getSearchContext(for: searchText)
         return try req.view().render("search", context)
     }
