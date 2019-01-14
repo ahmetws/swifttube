@@ -5,8 +5,21 @@
         <div class="row">
             <div class="col-sm">
                 <div class="section-header-container">
-                    <h2>#(conference.fullname)
-                    </h2>
+                    <div>
+                        <h2>#(conference.fullname)</h2>
+                        
+                        #if(conference.website) {
+                        <a class="text-grey-500" href="http://#(conference.website)" target="_blank">
+                            #(conference.website)
+                        </a>
+                        }
+                    </div>
+
+                    #if(conference.twitter) {
+                    <a href="https://twitter.com/#(conference.twitter)" target="_blank">
+                        <img src="/img/twitter.png" style="width:36px; height:36px;" />
+                    </a>
+                    }
                 </div>
             </div>
         </div>
