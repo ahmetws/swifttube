@@ -1,6 +1,9 @@
 <div class="container footer-container">
     <div class="row">
-        <div class="col-sm">
+        <div class="col-sm-12 text-grey-400 align-center">
+            Proudly <a href="https://github.com/ahmetws/swifttube" class="text-grey-500" target="_blank">Open Source</a> 🎉 Built with Server Side Swift <a href="https://vapor.codes/" class="text-grey-500" target="_blank">Vapor Framework</a> & <a href="https://github.com/OpenKitten/MongoKitten" class="text-grey-500" target="_blank">MongoKitten</a> 👏
+        </div>
+        <div class="col-sm-12 text-grey-500 align-center">
             swifttube.co 2019
         </div>
     </div>

@@ -77,6 +77,10 @@ section h2 {
     border-bottom: 1px solid #e8e8e8;
 }
 
+.align-center {
+    text-align: center;
+}
+
 .conferece-text {
     background-color: rgba(255, 255, 255, 0.0);
     position: absolute;
