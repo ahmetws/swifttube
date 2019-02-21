@@ -62,13 +62,6 @@
             ReferencedContainer = "container:swifttube.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "DB_URL"
-            value = "mongodb://swifttube-test:test123@ds113445.mlab.com:13445/swifttube-test"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
