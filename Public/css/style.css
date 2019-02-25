@@ -449,15 +449,6 @@ section h2 {
     color: #616161;
 }
 
-/* no-content */
-
-.no-content-container {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-    color: #616161;
-}
-
 /* embed */
 
 .embed-responsive {

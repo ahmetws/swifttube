@@ -25,11 +25,13 @@
 
 #embed("videosSection")
 
-#if(count(videos)==0) {
-<div class="container no-content-container">
+#if(count(videos) == 0) {
+<div class="container">
     <div class="row">
-        <div class="col-sm-12 align-center">
+        <div class="col-sm">
+            <div class="form-container" style="text-align: center">
             There are no videos for #(speaker.fullname) right now.<br />We're working hard to add new videos. They'll be here soon.
+            </div>
         </div>
     </div>
 </div>
