@@ -43,7 +43,7 @@ class APIClient: APIProtocol {
         let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
         let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
         let matchFeatured = AggregationPipeline.Stage.match("featured" == true)
-        let sampleStage = AggregationPipeline.Stage.sample(sizeOf: 9)
+        let sampleStage = AggregationPipeline.Stage.sample(sizeOf: 8)
         
         let pipe = AggregationPipeline(arrayLiteral: matchFeatured, lookupConferences, lookupSpeakers, sampleStage)
         

@@ -9,7 +9,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     try services.register(LeafProvider())
 
     services.register(OffsetPaginatorConfig(
-        perPage: 18,
+        perPage: 17,
         defaultPage: 1
     ))
     
