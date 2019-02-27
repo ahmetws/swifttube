@@ -53,6 +53,14 @@ class APIClient: APIProtocol {
         return videos
     }
     
+    
+    func getRandomVideo() -> Video? {
+        guard let videos = getVideos() else { return nil }
+        
+        let randomIndex = Int.random(in: 0 ..< videos.count)
+        return videos[randomIndex]
+    }
+    
     func getVideo(shortUrl: String) -> Video? {
         guard let database = database else { return nil }
 
