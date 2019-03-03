@@ -59,6 +59,19 @@ public func routes(_ router: Router) throws {
         }
     }
     
+    router.get("random") { (req: Request) -> EventLoopFuture<View> in
+        guard let video = apiClient.getRandomVideo() else {
+            return try req.view().render("404")
+        }
+        
+        let tags: [String] = video.tags?.arrayRepresentation.map({ value in
+            return String(describing: value)
+        }) ?? []
+        
+        let context = VideoDetailContext(video: video, twitterText: video.twitterText, tags: tags)
+        return try req.view().render("video", context)
+    }
+    
     router.get("conferences") { req -> EventLoopFuture<View> in
         guard let conferences = apiClient.getConferences() else {
             return try req.view().render("index")

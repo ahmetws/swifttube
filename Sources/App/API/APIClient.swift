@@ -53,6 +53,22 @@ class APIClient: APIProtocol {
         return videos
     }
     
+    func getRandomVideo() -> Video? {
+        guard let database = database else { return nil }
+        
+        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
+        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
+        let sampleStage = AggregationPipeline.Stage.sample(sizeOf: 1)
+        
+        let pipe = AggregationPipeline(arrayLiteral: sampleStage, lookupConferences, lookupSpeakers)
+
+        let randomVideo = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
+            return try BSONDecoder().decode(Video.self, from: document)
+        })
+        
+        return randomVideo?.first
+    }
+    
     func getVideo(shortUrl: String) -> Video? {
         guard let database = database else { return nil }
 
