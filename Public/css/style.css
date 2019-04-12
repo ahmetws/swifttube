@@ -358,6 +358,30 @@ section h2 {
     width: 100%;
 }
 
+.video-card .card-cover-no-image {
+    padding: 1rem;
+    background: #0e8fff;
+    height: 160px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    object-fit: cover;
+    width: 100%;
+    font-size: 24px;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+}
+
+.video-card .card-cover-no-image p {
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 .video-card .card-content {
     padding: 1rem;
     display: flex;

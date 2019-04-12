@@ -18,47 +18,7 @@
             }
             
             <div class="col-sm col-md-4">
-                <div class="video-card">
-                    <div class="card-cover">
-                        <div class="card-cover-aspect">
-                            <a href="/video/#(video.shortUrl)">
-                                <img src="#(video.image)" alt="#(video.title)">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <a href="/video/#(video.shortUrl)">
-                            <h3 class="card-title">#(video.title)</h3>
-                        </a>
-
-                        <div class="conference-names">
-                            #for(conference in video.conferencesArray) {
-                            <a href="/conference/#(conference.shortname)">
-                                <div class="card-subtitle">
-                                    #(conference.fullname)
-                                    <!-- <span class="date text-grey-500">
-                                        15 Sep 2018
-                                    </span> -->
-                                </div>
-                            </a>
-                            }
-                        </div>
-
-                        <div class="user-list">
-                            #for(speaker in video.speakersArray) {
-                            <a href="/speaker/#(speaker.shortname)">
-                                <div class="user-info">
-                                    <div class="avatar">
-                                        <img src="#(speaker.image)" alt="#(video.title)">
-                                    </div>
-
-                                    <div class="card-text">#(speaker.fullname)</div>
-                                </div>
-                            </a>
-                            }
-                        </div>
-                    </div>
-                </div>
+                #embed("videoCard")
             </div>
             }
         </div>
