@@ -202,6 +202,25 @@ section h2 {
     right: 1rem;
 }
 
+.conference-cell-no-image {
+    padding: .25rem;
+    background: #0e8fff;
+    border-radius: 8px;
+    object-fit: cover;
+    width: 100%;
+    font-size: 24px;
+    text-overflow: ellipsis;
+}
+
+.conference-cell-no-image p {
+    padding: .5rem;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 /* speakers */
 
 .speakers .speaker-cell {

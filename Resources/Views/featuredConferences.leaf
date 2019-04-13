@@ -13,14 +13,7 @@
 
             #for(conference in conferences) {
             <div class="col-sm col-md-4">
-                <a href="/conference/#(conference.shortname)">
-                    <div class="conference-cell">
-                        <div class="aspect">
-                            <!-- <div class="text">Some text</div> -->
-                            <img src="#(conference.image)" alt="#(conference.fullname)"/>
-                        </div>
-                    </div>
-                </a>
+                #embed("conferenceCard")
             </div>
             }
         </div>
