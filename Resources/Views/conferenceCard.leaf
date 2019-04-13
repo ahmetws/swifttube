@@ -1,0 +1,13 @@
+<a href="/conference/#(conference.shortname)">
+    #if(conference.image) {
+    <div class="conference-cell">
+        <div class="aspect">
+            <img src="#(conference.image)" alt="#(conference.fullname)"/>
+        </div>
+    </div>
+    } else {
+    <div class="conference-cell-no-image">
+        <p>#(conference.fullname)</p>
+    </div>
+    }
+</a>
