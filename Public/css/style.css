@@ -302,6 +302,21 @@ section h2 {
     margin: 0;
 }
 
+.video-detail-external {
+    padding: 3rem;
+    color: #fff;
+    background-color: #424242;
+    font-size: 24px;
+    text-overflow: ellipsis;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.video-detail-external a {
+    color: #0e8fff;
+}
+
 .video-detail-card-footer {
     display: flex;
     justify-content: space-between;

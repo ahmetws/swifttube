@@ -28,10 +28,18 @@
                         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
                 </div>
+                #if(video.external) {
+                <div class="video-detail-external">
+                    The source of the video doesn't allow us to show the video in the here.
+                    </br>
+                    </br>
+                    <a href="#(video.url)" target="_blank">Click here to watch the video on their website</a>
+                </div>
+                } else {
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="#(video.url)" allowfullscreen></iframe>
                 </div>
-
+                }
                 <div class="video-detail-card-footer">
                     <div class="user-info">
                         #for(speaker in video.speakersArray) {
