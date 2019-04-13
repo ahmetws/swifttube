@@ -30,7 +30,7 @@
                 </div>
                 #if(video.external) {
                 <div class="video-detail-external">
-                    The source of the video doesn't allow us to show the video in the here.
+                    The source of the video doesn't allow us to embed the video in here.
                     </br>
                     </br>
                     <a href="#(video.url)" target="_blank">Click here to watch the video on their website</a>
