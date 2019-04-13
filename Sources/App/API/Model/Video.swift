@@ -17,6 +17,7 @@ final class Video: Content, Codable {
     var tags: Document?
     var conferencesArray: [Document]?
     var speakersArray: [Document]?
+    var external: Bool?
 
     lazy var twitterText: String = {
         var text = "I just watched this great video \(title ?? "") by"
