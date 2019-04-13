@@ -7,7 +7,11 @@
                 <div class="section-header-container">
                     <div class="user-info">
                         <div class="avatar">
+                            #if(speaker.image != "") {
                             <img src="#(speaker.image)" alt="#(speaker.fullname)">
+                            } else {
+                            <img src="/img/swifttube-default.jpg" alt="#(speaker.fullname)">
+                            }
                         </div>
 
                         <div class="card-text"><h2>#(speaker.fullname)</h2></div>
