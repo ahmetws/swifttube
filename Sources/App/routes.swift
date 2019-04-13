@@ -137,6 +137,20 @@ public func routes(_ router: Router) throws {
         return try req.view().render("tag", context)
     }
     
+    // MARK: - RSS
+
+    router.get("rss") { req -> Response in
+        let videos = apiClient.getLatestVideos(limit: 20) ?? []
+        
+        let rssGenerator = RSSFeedGenerator(videoList: videos)
+        let xmlFeed = rssGenerator.feedHandler()
+        
+        var httpRes = HTTPResponse(status: .ok, body: xmlFeed)
+        httpRes.headers.replaceOrAdd(name:"Content-Type", value: "application/rss+xml")
+
+        return Response(http: httpRes, using: req)
+    }
+    
     // MARK: - Search
     
     router.get("search", String.parameter) { req -> EventLoopFuture<View> in

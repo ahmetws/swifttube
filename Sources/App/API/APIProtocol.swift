@@ -11,6 +11,7 @@ import MongoKitten
 protocol APIProtocol {
     
     func getVideos() -> Array<Video>?
+    func getLatestVideos(limit: Int?) -> Array<Video>?
     func getFeaturedVideos() -> Array<Video>?
     func getRandomVideo() -> Video?
     func getVideo(shortUrl: String) -> Video?

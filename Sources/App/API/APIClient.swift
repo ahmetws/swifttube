@@ -37,6 +37,26 @@ class APIClient: APIProtocol {
         return videos
     }
     
+    func getLatestVideos(limit: Int?) -> Array<Video>? {
+        guard let database = database else { return nil }
+        
+        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
+        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
+        
+        let sort = AggregationPipeline.Stage.sort(["createdAt": .descending])
+        var pipe = AggregationPipeline(arrayLiteral: lookupConferences, lookupSpeakers, sort)
+        
+        if let limitSize = limit {
+            let limitStage = AggregationPipeline.Stage.limit(limitSize)
+            pipe.append(limitStage)
+        }
+        let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
+            return try BSONDecoder().decode(Video.self, from: document)
+        })
+        
+        return videos
+    }
+    
     func getFeaturedVideos() -> Array<Video>? {
         guard let database = database else { return nil }
         
