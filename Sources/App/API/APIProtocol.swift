@@ -14,6 +14,7 @@ protocol APIProtocol {
     func getLatestVideos(limit: Int?) -> Array<Video>?
     func getFeaturedVideos() -> Array<Video>?
     func getRandomVideo() -> Video?
+    func getTodaysVideo() -> Video?
     func getVideo(shortUrl: String) -> Video?
     
     func getSpeakers() -> Array<Speaker>?

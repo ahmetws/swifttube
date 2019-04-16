@@ -89,6 +89,32 @@ class APIClient: APIProtocol {
         return randomVideo?.first
     }
     
+    func getTodaysVideo() -> Video? {
+        guard let database = database else { return nil }
+
+        let nowDate = Date()
+        let query: Query = [
+            "currentDate": [
+                "$gte": nowDate.startOfDay,
+                "$lt": nowDate.endOfDay
+            ]
+        ]
+        let matchQuery = AggregationPipeline.Stage.match(query)
+        let limitStage = AggregationPipeline.Stage.limit(1)
+        let pipe = AggregationPipeline(arrayLiteral: matchQuery, limitStage)
+
+        guard let todaysVideo = try? Array(database["todaysVideo"].aggregate(pipe).makeIterator()),
+            let video = todaysVideo.first else {
+            return nil
+        }
+
+        guard let videoId = video.dictionaryRepresentation["videoId"] as? String else {
+            return nil
+        }
+
+        return getVideo(videoId: videoId)
+    }
+    
     func getVideo(shortUrl: String) -> Video? {
         guard let database = database else { return nil }
 
@@ -104,7 +130,24 @@ class APIClient: APIProtocol {
 
         return videos?.first
     }
-    
+
+    func getVideo(videoId: String) -> Video? {
+        guard let database = database else { return nil }
+
+        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
+        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
+        
+        let matchStage = AggregationPipeline.Stage.match("_id" == videoId)
+
+        let pipe = AggregationPipeline(arrayLiteral: matchStage, lookupConferences, lookupSpeakers)
+
+        let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
+            return try BSONDecoder().decode(Video.self, from: document)
+        })
+
+        return videos?.first
+    }
+
     //MARK: - Speakers
     
     func getSpeakers() -> Array<Speaker>? {
@@ -227,5 +270,20 @@ class APIClient: APIProtocol {
             return try BSONDecoder().decode(Video.self, from: document)
         })
         return videos
+    }
+}
+
+// Extension
+
+extension Date {
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+
+    var endOfDay: Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)!
     }
 }

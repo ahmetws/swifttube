@@ -136,6 +136,21 @@ public func routes(_ router: Router) throws {
         let context = TagContext.init(videos: videos, tag: value)
         return try req.view().render("tag", context)
     }
+
+    // MARK: - Today's Video
+
+    router.get("today") { (req: Request) -> EventLoopFuture<View> in
+        guard let video = apiClient.getTodaysVideo() else {
+            return try req.view().render("404")
+        }
+        
+        let tags: [String] = video.tags?.arrayRepresentation.map({ value in
+            return String(describing: value)
+        }) ?? []
+        
+        let context = VideoDetailContext(video: video, twitterText: video.twitterText, tags: tags)
+        return try req.view().render("video", context)
+    }
     
     // MARK: - RSS
 
