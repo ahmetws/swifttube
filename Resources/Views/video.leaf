@@ -11,6 +11,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="#(video.image)">
 <meta name="twitter:site" content="@swifttubeco">
+
+<link rel="canonical" href="http://www.swifttube.co/video/#(video.shortUrl)">
 }
 
 #set("content") {

@@ -1,6 +1,7 @@
 <div class="container footer-container">
     <div class="row">
         <div class="col-sm-12 text-grey-700 align-center">
+            <a class="nav-link" href="/today">Today's Video</a> |
             <a class="nav-link" href="/random">Random Video</a> |
             <a class="nav-link" href="/rss">RSS Feed</a>
         </div>
