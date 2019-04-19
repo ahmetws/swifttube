@@ -137,6 +137,32 @@ public func routes(_ router: Router) throws {
         return try req.view().render("tag", context)
     }
 
+    // MARK: - Event
+
+    router.get("events") { req -> EventLoopFuture<View> in
+        guard let events = apiClient.getEvents() else {
+            return try req.view().render("404")
+        }
+
+        return try req.view().render("events", ["events": events])
+    }
+
+    router.get("event", String.parameter) { req -> EventLoopFuture<View> in
+        let value = try req.parameters.next(String.self)
+        guard let event = apiClient.getEvent(shortUrl: value) else {
+            return try req.view().render("404")
+        }
+
+
+        guard let eventId = event._id,
+            let videos = apiClient.getEventVideos(eventId: eventId) else {
+            return try req.view().render("404")
+        }
+
+        let context = EventContext(videos: videos, event: event)
+        return try req.view().render("event", context)
+    }
+
     // MARK: - Today's Video
 
     router.get("today") { (req: Request) -> EventLoopFuture<View> in

@@ -23,6 +23,8 @@
 /* Begin PBXBuildFile section */
 		4B58F91B226178D000225D12 /* RSSFeedGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B58F91A226178D000225D12 /* RSSFeedGenerator.swift */; };
 		4B58FBDC22621CC400225D12 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B58FBDB22621CC400225D12 /* AppConstants.swift */; };
+		4B58FE9B2269417D00225D12 /* EventContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B58FE9A2269417D00225D12 /* EventContext.swift */; };
+		4B58FE9D22694C1A00225D12 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B58FE9C22694C1A00225D12 /* Event.swift */; };
 		OBJ_1086 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* APIClient.swift */; };
 		OBJ_1087 /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* APIProtocol.swift */; };
 		OBJ_1088 /* ConferenceContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* ConferenceContext.swift */; };
@@ -6416,6 +6418,8 @@
 /* Begin PBXFileReference section */
 		4B58F91A226178D000225D12 /* RSSFeedGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedGenerator.swift; sourceTree = "<group>"; };
 		4B58FBDB22621CC400225D12 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		4B58FE9A2269417D00225D12 /* EventContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContext.swift; sourceTree = "<group>"; };
+		4B58FE9C22694C1A00225D12 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		"Auth::Authentication::Product" /* Authentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Authentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"BSON::BSON::Product" /* BSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Cheetah::Cheetah::Product" /* Cheetah.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cheetah.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8635,6 +8639,7 @@
 				OBJ_18 /* SpeakerContext.swift */,
 				OBJ_19 /* TagContext.swift */,
 				OBJ_20 /* VideoContext.swift */,
+				4B58FE9A2269417D00225D12 /* EventContext.swift */,
 			);
 			path = Context;
 			sourceTree = "<group>";
@@ -8850,6 +8855,7 @@
 			children = (
 				OBJ_22 /* Speaker.swift */,
 				OBJ_23 /* Video.swift */,
+				4B58FE9C22694C1A00225D12 /* Event.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -13335,6 +13341,8 @@
 				4B58FBDC22621CC400225D12 /* AppConstants.swift in Sources */,
 				OBJ_1087 /* APIProtocol.swift in Sources */,
 				OBJ_1088 /* ConferenceContext.swift in Sources */,
+				4B58FE9D22694C1A00225D12 /* Event.swift in Sources */,
+				4B58FE9B2269417D00225D12 /* EventContext.swift in Sources */,
 				OBJ_1089 /* HomeContext.swift in Sources */,
 				OBJ_1090 /* SearchContext.swift in Sources */,
 				OBJ_1091 /* SpeakerContext.swift in Sources */,

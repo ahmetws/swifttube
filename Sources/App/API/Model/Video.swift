@@ -1,10 +1,3 @@
-//
-//  Video.swift
-//  App
-//
-//  Created by Ahmet Yalcinkaya on 11/12/2018.
-//
-
 import Foundation
 import MongoKitten
 import Vapor
@@ -17,8 +10,10 @@ final class Video: Content, Codable {
     var tags: Document?
     var conferencesArray: [Document]?
     var speakersArray: [Document]?
+    var eventsArray: [Document]?
     var external: Bool?
     var createdAt: Date?
+    var videoDate: Date?
 
     lazy var twitterText: String = {
         var text = "I just watched this great video \(title ?? "") by"
@@ -52,5 +47,11 @@ final class Video: Content, Codable {
     
     init() { }
 
+    class func lookupList() -> [AggregationPipeline.Stage] {
+        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
+        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
+        let lookupEvent = AggregationPipeline.Stage.lookup(from: "events", localField: "event", foreignField: "_id", as: "eventsArray")
+        return [lookupConferences, lookupSpeakers, lookupEvent]
+    }
     
 }

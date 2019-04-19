@@ -44,15 +44,15 @@ class SearchAPIClient: SearchAPIProtocol {
         guard let database = database else { return nil }
         
         let query: Query = Query.textSearch(forString: searchText)
-
-        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
-        
         let matchQuery = AggregationPipeline.Stage.match(query)
         let sort = AggregationPipeline.Stage.sort(["videoDate": .descending])
-        
-        let pipe = AggregationPipeline(arrayLiteral: matchQuery, lookupConferences, lookupSpeakers, sort)
-        
+
+        var stages = Video.lookupList()
+        stages.insert(matchQuery, at: 0)
+        stages.append(sort)
+
+        let pipe = AggregationPipeline(arrayLiteral: stages)
+
         let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
         })

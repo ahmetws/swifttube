@@ -1,0 +1,31 @@
+#set("content") {
+
+<div class="container conferences">
+    <section>
+        <div class="row">
+            <div class="col-sm">
+                <div class="section-header-container">
+                    <h2>Events</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            #for(event in events) {
+            <div class="col-sm col-md-4">
+                #embed("eventCard")
+            </div>
+            }
+        </div>
+    </section>
+</div>
+
+#embed("footer")
+
+}
+
+#embed("base")
+
+
+

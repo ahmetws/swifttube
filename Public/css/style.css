@@ -208,8 +208,9 @@ section h2 {
     border-radius: 8px;
     object-fit: cover;
     width: 100%;
-    font-size: 24px;
+    font-size: 20px;
     text-overflow: ellipsis;
+    margin-bottom: .5rem;
 }
 
 .conference-cell-no-image p {
@@ -444,7 +445,8 @@ section h2 {
 }
 
 .video-card .card-subtitle .date {
-    padding-left: 0.5rem;
+    padding-left: .25rem;
+    font-size: 14px;
 }
 
 .video-card .user-list {

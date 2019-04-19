@@ -1,10 +1,3 @@
-//
-//  APIProtocol.swift
-//  App
-//
-//  Created by Ahmet Yalcinkaya on 02/12/2018.
-//
-
 import Foundation
 import MongoKitten
 
@@ -25,6 +18,10 @@ protocol APIProtocol {
     func getFeaturedConferences() -> Array<Document>?
     func getConference(shortUrl: String) -> Document?
     func getConferenceVideos(conferenceId: Primitive) -> Array<Video>?
+
+    func getEvents() -> Array<Event>?
+    func getEvent(shortUrl: String) -> Event?
+    func getEventVideos(eventId: Primitive) -> Array<Video>?
 
     func getTagVideos(tag: String) -> Array<Video>?
 }

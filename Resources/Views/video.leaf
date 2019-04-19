@@ -59,11 +59,21 @@
                     <div class="conference-info">
                         #for(conference in video.conferencesArray) {
                         <a href="/conference/#(conference.shortname)">
-                            <div class="card-subtitle" style="margin-left: 20px;">
+                            <div class="card-subtitle" style="margin-left: 10px;">
                                 #(conference.fullname)
                             </div>
                         </a>
                         }
+                        #for(event in video.eventsArray) {
+                        <a href="/event/#(event.shortname)">
+                            <div class="card-subtitle text-grey-600" style="margin-left: 10px;">
+                                #(event.fullname)
+                            </div>
+                        </a>
+                        }
+                        <span class="date text-grey-500" style="margin-left: 10px;">
+                            #date(video.videoDate, "dd MMM yyyy")
+                        </span>
                     </div>
                 </div>
             </div>
