@@ -20,13 +20,13 @@
         </a>
         
         <div class="conference-names">
-            #for(conference in video.conferencesArray) {
-            <a href="/conference/#(conference.shortname)">
+            #for(event in video.eventsArray) {
+            <a href="/event/#(event.shortname)">
                 <div class="card-subtitle">
-                    #(conference.fullname)
-                    <!--<span class="date text-grey-500">
-                     15 Sep 2018
-                     </span>-->
+                    #(event.fullname)
+                    <span class="date text-grey-500">
+                     #date(video.videoDate, "dd MMM yyyy")
+                     </span>
                 </div>
             </a>
             }

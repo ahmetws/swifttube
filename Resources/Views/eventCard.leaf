@@ -1,0 +1,5 @@
+<a href="/event/#(event.shortname)">
+    <div class="conference-cell-no-image">
+        <p>#(event.fullname)</p>
+    </div>
+</a>

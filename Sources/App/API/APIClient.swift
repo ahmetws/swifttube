@@ -1,10 +1,3 @@
-//
-//  APIClient.swift
-//  App
-//
-//  Created by Ahmet Yalcinkaya on 02/12/2018.
-//
-
 import Foundation
 import MongoKitten
 
@@ -23,13 +16,12 @@ class APIClient: APIProtocol {
     
     func getVideos() -> Array<Video>? {
         guard let database = database else { return nil }
-        
-        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
 
         let sort = AggregationPipeline.Stage.sort(["videoDate": .descending])
-        let pipe = AggregationPipeline(arrayLiteral: lookupConferences, lookupSpeakers, sort)
-        
+        var stages = Video.lookupList()
+        stages.append(sort)
+
+        let pipe = AggregationPipeline(arrayLiteral: stages)
         let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
         })
@@ -39,17 +31,17 @@ class APIClient: APIProtocol {
     
     func getLatestVideos(limit: Int?) -> Array<Video>? {
         guard let database = database else { return nil }
-        
-        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
-        
+
         let sort = AggregationPipeline.Stage.sort(["createdAt": .descending])
-        var pipe = AggregationPipeline(arrayLiteral: lookupConferences, lookupSpeakers, sort)
-        
+        var stages = Video.lookupList()
+        stages.append(sort)
+
         if let limitSize = limit {
             let limitStage = AggregationPipeline.Stage.limit(limitSize)
-            pipe.append(limitStage)
+            stages.append(limitStage)
         }
+
+        let pipe = AggregationPipeline(arrayLiteral: stages)
         let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
         })
@@ -59,14 +51,14 @@ class APIClient: APIProtocol {
     
     func getFeaturedVideos() -> Array<Video>? {
         guard let database = database else { return nil }
-        
-        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
-        let matchFeatured = AggregationPipeline.Stage.match("featured" == true)
+
+        let matchQuery = AggregationPipeline.Stage.match("featured" == true)
         let sampleStage = AggregationPipeline.Stage.sample(sizeOf: 8)
-        
-        let pipe = AggregationPipeline(arrayLiteral: matchFeatured, lookupConferences, lookupSpeakers, sampleStage)
-        
+        var stages = Video.lookupList()
+        stages.append(matchQuery)
+        stages.append(sampleStage)
+
+        let pipe = AggregationPipeline(arrayLiteral: stages)
         let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
         })
@@ -75,13 +67,12 @@ class APIClient: APIProtocol {
     
     func getRandomVideo() -> Video? {
         guard let database = database else { return nil }
-        
-        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
-        let sampleStage = AggregationPipeline.Stage.sample(sizeOf: 1)
-        
-        let pipe = AggregationPipeline(arrayLiteral: sampleStage, lookupConferences, lookupSpeakers)
 
+        let sampleStage = AggregationPipeline.Stage.sample(sizeOf: 1)
+        var stages = Video.lookupList()
+        stages.append(sampleStage)
+
+        let pipe = AggregationPipeline(arrayLiteral: stages)
         let randomVideo = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
         })
@@ -118,12 +109,11 @@ class APIClient: APIProtocol {
     func getVideo(shortUrl: String) -> Video? {
         guard let database = database else { return nil }
 
-        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
-        let matchStage = AggregationPipeline.Stage.match("shortUrl" == shortUrl)
-        
-        let pipe = AggregationPipeline(arrayLiteral: matchStage, lookupConferences, lookupSpeakers)
-        
+        let matchQuery = AggregationPipeline.Stage.match("shortUrl" == shortUrl)
+        var stages = Video.lookupList()
+        stages.append(matchQuery)
+
+        let pipe = AggregationPipeline(arrayLiteral: stages)
         let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
         })
@@ -134,12 +124,11 @@ class APIClient: APIProtocol {
     func getVideo(videoId: String) -> Video? {
         guard let database = database else { return nil }
 
-        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
-        
-        let matchStage = AggregationPipeline.Stage.match("_id" == videoId)
+        let matchQuery = AggregationPipeline.Stage.match("_id" == videoId)
+        var stages = Video.lookupList()
+        stages.append(matchQuery)
 
-        let pipe = AggregationPipeline(arrayLiteral: matchStage, lookupConferences, lookupSpeakers)
+        let pipe = AggregationPipeline(arrayLiteral: stages)
 
         let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
@@ -175,10 +164,7 @@ class APIClient: APIProtocol {
     
     func getSpeakerVideos(speakerId: Primitive) -> Array<Video>? {
         guard let database = database else { return nil }
-        
-        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
-        
+
         let query: Query = [
             "users": [
                 "$elemMatch": [
@@ -188,9 +174,11 @@ class APIClient: APIProtocol {
         ]
         let matchQuery = AggregationPipeline.Stage.match(query)
         let sort = AggregationPipeline.Stage.sort(["videoDate": .descending])
+        var stages = Video.lookupList()
+        stages.append(matchQuery)
+        stages.append(sort)
 
-        let pipe = AggregationPipeline(arrayLiteral: matchQuery, lookupConferences, lookupSpeakers, sort)
-        
+        let pipe = AggregationPipeline(arrayLiteral: stages)
         let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
         })
@@ -234,14 +222,56 @@ class APIClient: APIProtocol {
     
     func getConferenceVideos(conferenceId: Primitive) -> Array<Video>? {
         guard let database = database else { return nil }
-        
-        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
+
         let matchQuery = AggregationPipeline.Stage.match("conferences" == conferenceId)
         let sort = AggregationPipeline.Stage.sort(["videoDate": .descending])
+        var stages = Video.lookupList()
+        stages.append(matchQuery)
+        stages.append(sort)
 
-        let pipe = AggregationPipeline(arrayLiteral: matchQuery, lookupConferences, lookupSpeakers, sort)
-        
+        let pipe = AggregationPipeline(arrayLiteral: stages)
+        let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
+            return try BSONDecoder().decode(Video.self, from: document)
+        })
+        return videos
+    }
+
+    // MARK: - Event
+
+    func getEvents() -> Array<Event>? {
+        guard let database = database else { return nil }
+
+        let events = try? Array(database["events"].find()).map({ document in
+            return try BSONDecoder().decode(Event.self, from: document)
+        })
+        return events
+    }
+
+    func getEvent(shortUrl: String) -> Event? {
+        guard let database = database else { return nil }
+
+        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conference", foreignField: "_id", as: "conferencesArray")
+        let matchQuery = AggregationPipeline.Stage.match("shortname" == shortUrl)
+
+        let pipe = AggregationPipeline(arrayLiteral: lookupConferences, matchQuery)
+
+        let events = try? Array(database["events"].aggregate(pipe).makeIterator()).map({ document in
+            return try BSONDecoder().decode(Event.self, from: document)
+        })
+
+        return events?.first
+    }
+
+    func getEventVideos(eventId: Primitive) -> Array<Video>? {
+        guard let database = database else { return nil }
+
+        let matchQuery = AggregationPipeline.Stage.match("event" == eventId)
+        let sort = AggregationPipeline.Stage.sort(["videoDate": .descending])
+        var stages = Video.lookupList()
+        stages.append(matchQuery)
+        stages.append(sort)
+
+        let pipe = AggregationPipeline(arrayLiteral: stages)
         let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
         })
@@ -250,9 +280,6 @@ class APIClient: APIProtocol {
     
     func getTagVideos(tag: String) -> Array<Video>? {
         guard let database = database else { return nil }
-        
-        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
         
         let query: Query = [
             "tags": [
@@ -263,9 +290,11 @@ class APIClient: APIProtocol {
         ]
         let matchQuery = AggregationPipeline.Stage.match(query)
         let sort = AggregationPipeline.Stage.sort(["videoDate": .descending])
+        var stages = Video.lookupList()
+        stages.append(matchQuery)
+        stages.append(sort)
 
-        let pipe = AggregationPipeline(arrayLiteral: matchQuery, lookupConferences, lookupSpeakers, sort)
-        
+        let pipe = AggregationPipeline(arrayLiteral: stages)
         let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
             return try BSONDecoder().decode(Video.self, from: document)
         })

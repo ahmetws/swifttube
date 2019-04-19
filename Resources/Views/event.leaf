@@ -1,0 +1,50 @@
+#set("content") {
+
+<div class="container speakers">
+    <section>
+        <div class="row">
+            <div class="col-sm">
+                <div class="section-header-container">
+                    <div>
+                        <h2>#(event.fullname)</h2>
+                        #for(conference in event.conferencesArray) {
+                        <a href="/conference/#(conference.shortname)">
+                            <div class="card-subtitle">
+                               by #(conference.fullname)
+                            </div>
+                        </a>
+                        }
+
+                        #if(event.website) {
+                        <a class="text-grey-500" href="http://#(event.website)" target="_blank">
+                            #(event.website)
+                        </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+#embed("videosSection")
+
+#if(count(videos) == 0) {
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="no-content-container" style="text-align: center">
+                There are no videos for <b>#(event.fullname)</b> right now.<br/> We are working hard to add new videos and we hope they will be here soon.
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+#embed("footer")
+
+}
+
+#embed("base")
+
