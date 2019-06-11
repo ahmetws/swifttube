@@ -10,13 +10,8 @@
         </div>
 
         <div class="row">
-            
+
             #for(video in videos) {
-            
-            #if(index == 5) {
-                #embed("ads")
-            }
-            
             <div class="col-sm col-md-4">
                 #embed("videoCard")
             </div>

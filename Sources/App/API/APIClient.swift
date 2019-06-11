@@ -53,7 +53,7 @@ class APIClient: APIProtocol {
         guard let database = database else { return nil }
 
         let matchQuery = AggregationPipeline.Stage.match("featured" == true)
-        let sampleStage = AggregationPipeline.Stage.sample(sizeOf: 8)
+        let sampleStage = AggregationPipeline.Stage.sample(sizeOf: 9)
         var stages = Video.lookupList()
         stages.append(matchQuery)
         stages.append(sampleStage)
