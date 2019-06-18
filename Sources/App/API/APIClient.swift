@@ -220,7 +220,7 @@ extension Date {
 
 private extension String {
     static let videos = "videos"
-    static let todaysVideo = "todaysVideos"
+    static let todaysVideo = "todaysVideo"
     static let users = "users"
     static let conferences = "conferences"
     static let events = "events"
