@@ -91,18 +91,6 @@ class APIClient: APIProtocol {
                 guard let document = document else { return nil }
                 return try BSONDecoder().decode(Video.self, from: document)
             })
-
-//        let matchQuery = AggregationPipeline.Stage.match("_id" == videoId)
-//        var stages = Video.lookupList()
-//        stages.append(matchQuery)
-//
-//        let pipe = AggregationPipeline(arrayLiteral: stages)
-//
-//        let videos = try? Array(database["videos"].aggregate(pipe).makeIterator()).map({ document in
-//            return try BSONDecoder().decode(Video.self, from: document)
-//        })
-//
-//        return videos?.first
     }
 
     //MARK: - Speakers
