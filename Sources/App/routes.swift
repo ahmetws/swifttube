@@ -2,10 +2,8 @@ import Vapor
 import MongoKitten
 import Paginator
 
-/// Register your application's routes here.
 public func routes(_ router: Router) throws {
 
-    let databaseUrl = Environment.get("DB_URL")
     let apiClient: APIProtocol = APIClient()
     let searchAPIClient: SearchAPIProtocol = SearchAPIClient()
 
@@ -61,7 +59,7 @@ public func routes(_ router: Router) throws {
             }
 
             let tags: [String] = randomVideo.tags?.map({ value in
-                return String(describing: value)
+                return String(describing: value.1)
             }) ?? []
 
             let context = VideoDetailContext(video: randomVideo, twitterText: randomVideo.twitterText, tags: tags)
@@ -97,7 +95,7 @@ public func routes(_ router: Router) throws {
             }
 
             let tags: [String] = video.tags?.map({ value in
-                return String(describing: value)
+                return String(describing: value.1)
             }) ?? []
 
             let context = VideoDetailContext(video: video, twitterText: video.twitterText, tags: tags)

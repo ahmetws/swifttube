@@ -1,4 +1,4 @@
 module CNIOOpenSSL {
-    umbrella "/Users/tompearson/Code/swifttube/.build/checkouts/swift-nio-ssl/Sources/CNIOOpenSSL/include"
+    umbrella "/Users/ahmetws/Desktop/swiftist/swifttube/.build/checkouts/swift-nio-ssl.git--8603148277304892084/Sources/CNIOOpenSSL/include"
     export *
 }

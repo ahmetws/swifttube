@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/nodes-vapor/paginator.git",
         "state": {
           "branch": null,
-          "revision": "965c23ec878efa82dadd96a863327dc6c8ce6a2d",
-          "version": "3.3.2"
+          "revision": "34fc03d23f31d02b7de398e6984379f2fcf2f389",
+          "version": "3.3.3"
         }
       },
       {

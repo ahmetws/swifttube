@@ -52,9 +52,15 @@ class APIClient: APIProtocol {
             .getAllResults()
     }
     
-    /// doesn't work, always gives the same video..
     func getRandomVideo(_ db: Database) -> EventLoopFuture<Video?> {
+        let sampleStage: Document = [
+            "$sample": [
+                "size": 1
+            ]
+        ]
+
         return getAggregatedVideos(db)
+            .append(sampleStage)
             .decode(Video.self)
             .getFirstResult()
     }
@@ -69,11 +75,21 @@ class APIClient: APIProtocol {
         ]
         
         let videos = db[.todaysVideo]
-        
-        return videos.findOne(query).flatMap { (document) -> EventLoopFuture<Video?> in
-            let id = document!["videoId"] as! String
-            return self.getVideo(db, videoId: id)
-        }
+
+        return videos.aggregate()
+            .match(query)
+            .getFirstResult()
+            .map(to: String.self, { (document) -> String in
+                guard let document = document,
+                    let videoId = document["videoId"] as? String else {
+                        // Video id not found
+                        throw NSError(domain: "", code: 111, userInfo: nil)
+                }
+                return videoId
+            })
+            .flatMap({ (videoId) -> EventLoopFuture<Video?> in
+                return self.getVideo(db, videoId: videoId)
+            })
     }
     
     func getVideo(_ db: Database, shortUrl: String) -> EventLoopFuture<Video?> {
@@ -83,14 +99,11 @@ class APIClient: APIProtocol {
             .getFirstResult()
     }
 
-    func getVideo(_ db: Database, videoId: String) -> EventLoopFuture<Video?> {
+    func getVideo(_ db: Database, videoId: String?) -> EventLoopFuture<Video?> {
         return getAggregatedVideos(db)
             .match("_id" == videoId)
+            .decode(Video.self)
             .getFirstResult()
-            .map({ (document: Document?) -> (Video?) in
-                guard let document = document else { return nil }
-                return try BSONDecoder().decode(Video.self, from: document)
-            })
     }
 
     //MARK: - Speakers
@@ -192,19 +205,6 @@ class APIClient: APIProtocol {
 }
 
 // Extension
-
-extension Date {
-    var startOfDay: Date {
-        return Calendar.current.startOfDay(for: self)
-    }
-
-    var endOfDay: Date {
-        var components = DateComponents()
-        components.day = 1
-        components.second = -1
-        return Calendar.current.date(byAdding: components, to: startOfDay)!
-    }
-}
 
 private extension String {
     static let videos = "videos"
