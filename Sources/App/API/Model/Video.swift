@@ -46,12 +46,5 @@ final class Video: Content, Codable {
     }()
     
     init() { }
-
-//    class func lookupList() -> [AggregationPipeline.Stage] {
-//        let lookupConferences = AggregationPipeline.Stage.lookup(from: "conferences", localField: "conferences", foreignField: "_id", as: "conferencesArray")
-//        let lookupSpeakers = AggregationPipeline.Stage.lookup(from: "users", localField: "users", foreignField: "_id", as: "speakersArray")
-//        let lookupEvent = AggregationPipeline.Stage.lookup(from: "events", localField: "event", foreignField: "_id", as: "eventsArray")
-//        return [lookupConferences, lookupSpeakers, lookupEvent]
-//    }
     
 }
