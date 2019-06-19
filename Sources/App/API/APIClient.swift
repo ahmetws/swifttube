@@ -152,8 +152,8 @@ class APIClient: APIProtocol {
     }
     
     func getConferenceVideos(_ db: Database, conferenceId: Primitive) -> EventLoopFuture<[Video]> {
-        return db[.videos]
-            .find("conferences" == conferenceId)
+        return getAggregatedVideos(db)
+            .match("conferences" == conferenceId)
             .sort(["videoDate": .descending])
             .decode(Video.self)
             .getAllResults()
@@ -181,8 +181,8 @@ class APIClient: APIProtocol {
     }
 
     func getEventVideos(_ db: Database, eventId: Primitive) -> EventLoopFuture<[Video]>	 {
-        return db[.videos]
-            .find("event" == eventId)
+        return getAggregatedVideos(db)
+            .match("event" == eventId)
             .sort(["videoDate": .descending])
             .decode(Video.self)
             .getAllResults()

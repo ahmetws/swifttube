@@ -190,76 +190,42 @@ public func routes(_ router: Router) throws {
     
     // MARK: - Search
     
-//    router.get("search", String.parameter) { req -> EventLoopFuture<View> in
-//        let db = try req.getDb()
-//        
-//        let searchText = try req.parameters.next(String.self)
-//        searchAPIClient.save(db, searchText: searchText)
-//        
-//        return getSearchContext(db, for: searchText).flatMap({ context in
-//            return try req.view().render("search", context)
-//        })
-//    }
-//    
-//    router.post("search") { req -> EventLoopFuture<View> in
-//        let db = try req.getDb()
-//        
-//        let searchText: String = try req.content.syncGet(at: "searchText")
-//        searchAPIClient.save(try req.getDb(), searchText: searchText)
-//        
-//        return getSearchContext(db, for: searchText).flatMap({ context in
-//            return try req.view().render("search", context)
-//        })
-//    }
-//    
-//    func getSearchContext(_ db: MongoKitten.Database, for searchText: String) -> EventLoopFuture<SearchContext> {
-        
-//        return searchAPIClient.getSearchedConferences(db, searchText: searchText).map({ conferences in
-//            return searchAPIClient.getSearchedSpeakers(db, searchText: searchText).flatMap(to: SearchContext, { speakers in
-//                return searchAPIClient.getSearchedVideos(db, searchText: searchText).map(to: [Video].self, { videos in
-//                    var hasResult = true
-//                    if videos.isEmpty && conferences.isEmpty && speakers.isEmpty {
-//                        hasResult = false
-//                    }
-//
-//                    let context = SearchContext(videos: videos, conferences: conferences, speakers: speakers, tags: [], hasResult: hasResult)
-//                    return context
-//                })
-//            })
-//
-////            let context = SearchContext(videos: [], conferences: documents, speakers: [], tags: [], hasResult: false)
-////            return context
-//        })
-        
-//        let futures = searchAPIClient.getSearchedSpeakers(db, searchText: searchText)
-//            .and(searchAPIClient.getSearchedConferences(db, searchText: searchText))
-//            .and(searchAPIClient.getSearchedVideos(db, searchText: searchText))
-//            .map ({ (result) -> EventLoopFuture<SearchContext> in
-//                var hasResult = true
-//                if result.0.0.isEmpty && result.0.1.isEmpty && result.1.isEmpty {
-//                    hasResult = false
-//                }
-//
-//                let context = SearchContext(videos: result.1, conferences: result.0.1, speakers: result.0.0, tags: [], hasResult: hasResult)
-//                return context
-//        })
-//
-//        return futures
-        
-        
-//        let speakers = searchAPIClient.getSearchedSpeakers(searchText: searchText) ?? []
-//        let conferences = searchAPIClient.getSearchedConferences(searchText: searchText) ?? []
-//        let videos = searchAPIClient.getSearchedVideos(searchText: searchText) ?? []
-//        let tags = searchAPIClient.getSearchedTags(searchText: searchText) ?? []
-//
-//        var hasResult = true
-//        if speakers.isEmpty && conferences.isEmpty && videos.isEmpty && tags.isEmpty  {
-//            hasResult = false
-//        }
-//
-//        let context = SearchContext(videos: videos, conferences: conferences, speakers: speakers, tags: tags, hasResult: hasResult)
-//        return context
-//    }
+    router.get("search", String.parameter) { req -> EventLoopFuture<View> in
+        let db = try req.getDb()
+
+        let searchText = try req.parameters.next(String.self)
+        searchAPIClient.save(db, searchText: searchText)
+
+        return getSearchContext(db, for: searchText).flatMap({ context in
+            return try req.view().render("search", context)
+        })
+    }
+
+    router.post("search") { req -> EventLoopFuture<View> in
+        let db = try req.getDb()
+
+        let searchText: String = try req.content.syncGet(at: "searchText")
+        searchAPIClient.save(try req.getDb(), searchText: searchText)
+
+        return getSearchContext(db, for: searchText).flatMap({ context in
+            return try req.view().render("search", context)
+        })
+    }
+
+    func getSearchContext(_ db: MongoKitten.Database, for searchText: String) -> EventLoopFuture<SearchContext> {
+        return searchAPIClient.getSearchedSpeakers(db, searchText: searchText)
+            .and(searchAPIClient.getSearchedConferences(db, searchText: searchText))
+            .and(searchAPIClient.getSearchedVideos(db, searchText: searchText))
+            .map ({ (result) -> SearchContext in
+                var hasResult = true
+                if result.0.0.isEmpty && result.0.1.isEmpty && result.1.isEmpty {
+                    hasResult = false
+                }
+
+                let context = SearchContext(videos: result.1, conferences: result.0.1, speakers: result.0.0, hasResult: hasResult)
+                return context
+            })
+    }
 }
 
 private extension Request {

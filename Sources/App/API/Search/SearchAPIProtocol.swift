@@ -12,6 +12,5 @@ protocol SearchAPIProtocol {
     func getSearchedSpeakers(_ db: Database, searchText: String) -> EventLoopFuture<[Document]>
     func getSearchedConferences(_ db: Database, searchText: String) -> EventLoopFuture<[Document]>
     func getSearchedVideos(_ db: Database, searchText: String) -> EventLoopFuture<[Video]>
-//    func getSearchedTags(searchText: String) -> EventLoopFuture<[Document]>
     func save(_ db: Database, searchText: String)
 }
