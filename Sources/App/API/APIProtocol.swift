@@ -3,25 +3,25 @@ import MongoKitten
 
 protocol APIProtocol {
     
-    func getVideos() -> Array<Video>?
-    func getLatestVideos(limit: Int?) -> Array<Video>?
-    func getFeaturedVideos() -> Array<Video>?
-    func getRandomVideo() -> Video?
-    func getTodaysVideo() -> Video?
-    func getVideo(shortUrl: String) -> Video?
+    func getVideos(_ db: Database) -> EventLoopFuture<[Video]>
+    func getLatestVideos(_ db: Database, limit: Int?) -> EventLoopFuture<[Video]>
+    func getFeaturedVideos(_ db: Database) -> EventLoopFuture<[Video]>
+    func getRandomVideo(_ db: Database) -> EventLoopFuture<Video?>
+    func getTodaysVideo(_ db: Database) -> EventLoopFuture<Video?>
+    func getVideo(_ db: Database, shortUrl: String) -> EventLoopFuture<Video?>
     
-    func getSpeakers() -> Array<Speaker>?
-    func getSpeaker(shortUrl: String) -> Document?
-    func getSpeakerVideos(speakerId: Primitive) -> Array<Video>?
+    func getSpeakers(_ db: Database) -> EventLoopFuture<[Speaker]>
+    func getSpeaker(_ db: Database, shortUrl: String) -> EventLoopFuture<Document?>
+    func getSpeakerVideos(_ db: Database, speakerId: Primitive) -> EventLoopFuture<[Video]>?
 
-    func getConferences() -> Array<Document>?
-    func getFeaturedConferences() -> Array<Document>?
-    func getConference(shortUrl: String) -> Document?
-    func getConferenceVideos(conferenceId: Primitive) -> Array<Video>?
+    func getConferences(_ db: Database) -> EventLoopFuture<[Document]>
+    func getFeaturedConferences(_ db: Database) -> EventLoopFuture<[Document]>
+    func getConference(_ db: Database, shortUrl: String) -> EventLoopFuture<Document?>
+    func getConferenceVideos(_ db: Database, conferenceId: Primitive) -> EventLoopFuture<[Video]>
 
-    func getEvents() -> Array<Event>?
-    func getEvent(shortUrl: String) -> Event?
-    func getEventVideos(eventId: Primitive) -> Array<Video>?
+    func getEvents(_ db: Database) -> EventLoopFuture<[Event]>
+    func getEvent(_ db: Database, shortUrl: String) -> EventLoopFuture<Event?>
+    func getEventVideos(_ db: Database, eventId: Primitive) -> EventLoopFuture<[Video]>
 
-    func getTagVideos(tag: String) -> Array<Video>?
+    func getTagVideos(_ db: Database, tag: String) -> EventLoopFuture<[Video]>
 }
