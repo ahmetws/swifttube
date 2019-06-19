@@ -73,8 +73,8 @@ extension Video {
         }
 
         if let tags = tags {
-            for tag in tags{
-                videoEntry += "<category>\(tag.value)</category>\n"
+            for tag in tags {
+                videoEntry += "<category>\(tag.0)</category>\n"
             }
         }
 

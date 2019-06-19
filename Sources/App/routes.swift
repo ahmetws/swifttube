@@ -2,226 +2,234 @@ import Vapor
 import MongoKitten
 import Paginator
 
-/// Register your application's routes here.
 public func routes(_ router: Router) throws {
 
-    let databaseUrl = Environment.get("DB_URL")
-    let apiClient: APIProtocol = APIClient(databaseUrl: databaseUrl)
-    let searchAPIClient: SearchAPIProtocol = SearchAPIClient(databaseUrl: databaseUrl)
+    let apiClient: APIProtocol = APIClient()
+    let searchAPIClient: SearchAPIProtocol = SearchAPIClient()
 
     router.get { req -> EventLoopFuture<View> in
-        guard let videos = apiClient.getFeaturedVideos() else {
-            return try req.view().render("index")
-        }
+        let videos = apiClient.getFeaturedVideos(try req.getDb())
         
-        guard let conferences = apiClient.getFeaturedConferences() else {
-            return try req.view().render("index")
-        }
-        
-        let context = HomeContext.init(videos: videos, conferences: conferences)
-        return try req.view().render("index", context)
+        return videos.flatMap({ (mappedVideos) -> EventLoopFuture<View> in
+            let content = HomeContext(videos: mappedVideos, conferences: [])
+            return try req.view().render("index", content)
+        })
     }
     
     router.get("speakers") { req -> EventLoopFuture<View> in
-        guard let speakers = apiClient.getSpeakers() else {
-            return try req.view().render("speakers")
-        }
+        let speakersFuture = apiClient.getSpeakers(try req.getDb())
         
-        return try req.view().render("speakers", ["speakers": speakers])
+        return speakersFuture.flatMap({ speakers in
+            return try req.view().render("speakers", ["speakers": speakers])
+        })
     }
-    
+
     router.get("speakers") { (req: Request) -> EventLoopFuture<Response> in
-        let speakers = apiClient.getSpeakers() ?? []
+        let speakersFuture = apiClient.getSpeakers(try req.getDb())
         
-        let paginator: Future<OffsetPaginator<Speaker>> = try speakers.paginate(for: req)
-        return paginator.flatMap(to: Response.self) { paginator in
-            return try req.view().render(
-                "speakers",
-                SpeakersContext(speakers: paginator.data ?? []),
-                userInfo: try paginator.userInfo()
-                )
-                .encode(for: req)
-        }
+        return speakersFuture.flatMap({ (speakers) in
+            let paginator: Future<OffsetPaginator<Speaker>> = try speakers.paginate(for: req)
+            return paginator.flatMap(to: Response.self) { paginator in
+                return try req.view().render(
+                    "speakers",
+                    SpeakersContext(speakers: paginator.data ?? []),
+                    userInfo: try paginator.userInfo()
+                    )
+                    .encode(for: req)
+            }
+        })
     }
     
     router.get("videos") { (req: Request) -> EventLoopFuture<Response> in
-        
-        let videos = apiClient.getVideos() ?? []
-        
-        let paginator: Future<OffsetPaginator<Video>> = try videos.paginate(for: req)
-        return paginator.flatMap(to: Response.self) { paginator in
-            return try req.view().render(
-                "videos",
-                VideoContext.init(videos: paginator.data ?? []),
-                userInfo: try paginator.userInfo()
-                )
-                .encode(for: req)
-        }
+        return apiClient.getVideos(try req.getDb()).flatMap({ (videos) -> EventLoopFuture<Response> in
+            let paginator: Future<OffsetPaginator<Video>> = try videos.paginate(for: req)
+
+            return try paginator.flatMap({ (offset) -> EventLoopFuture<Response> in
+                return try! req.view().render("videos", VideoContext.init(videos: offset.data ?? []), userInfo: try offset.userInfo()).encode(for: req)
+            })
+            .encode(for: req)
+        })
     }
     
     router.get("random") { (req: Request) -> EventLoopFuture<View> in
-        guard let video = apiClient.getRandomVideo() else {
-            return try req.view().render("404")
-        }
-        
-        let tags: [String] = video.tags?.arrayRepresentation.map({ value in
-            return String(describing: value)
-        }) ?? []
-        
-        let context = VideoDetailContext(video: video, twitterText: video.twitterText, tags: tags)
-        return try req.view().render("video", context)
+        return apiClient.getRandomVideo(try req.getDb()).flatMap({ video -> EventLoopFuture<View> in
+
+            guard let randomVideo = video else {
+                return try req.view().render("404")
+            }
+
+            let tags: [String] = randomVideo.tags?.map({ value in
+                return String(describing: value.1)
+            }) ?? []
+
+            let context = VideoDetailContext(video: randomVideo, twitterText: randomVideo.twitterText, tags: tags)
+            return try req.view().render("video", context)
+        })
     }
     
     router.get("conferences") { req -> EventLoopFuture<View> in
-        guard let conferences = apiClient.getConferences() else {
-            return try req.view().render("index")
-        }
-        
+        let conferences = apiClient.getConferences(try req.getDb())
         return try req.view().render("conferences", ["conferences": conferences])
     }
-    
+
     router.get("conference", String.parameter) { req -> EventLoopFuture<View> in
         let value = try req.parameters.next(String.self)
-        guard let conference = apiClient.getConference(shortUrl: value) else {
-            return try req.view().render("index")
-        }
-        
-        let confId = conference["_id"]!
-        
-        guard let videos = apiClient.getConferenceVideos(conferenceId: confId) else {
-            return try req.view().render("index")
-        }
-        
-        let context = ConferenceContext.init(videos: videos, conference: conference)
-        return try req.view().render("conference", context)
+
+        return apiClient.getConference(try req.getDb(), shortUrl: value).flatMap({ (conference) -> EventLoopFuture<View> in
+            let confId = conference!["_id"]!
+
+            return apiClient.getConferenceVideos(try req.getDb(), conferenceId: confId).flatMap({ (videos) -> EventLoopFuture<View> in
+                let context = ConferenceContext.init(videos: videos, conference: conference!)
+                return try req.view().render("conference", context)
+            })
+        })
     }
     
     router.get("video", String.parameter) { req -> EventLoopFuture<View> in
         let value = try req.parameters.next(String.self)
-        guard let video = apiClient.getVideo(shortUrl: value) else {
-            return try req.view().render("404")
-        }
-                
-        let tags: [String] = video.tags?.arrayRepresentation.map({ value in
-            return String(describing: value)
-        }) ?? []
-        
-        let context = VideoDetailContext(video: video, twitterText: video.twitterText, tags: tags)
-        return try req.view().render("video", context)
+
+        return apiClient.getVideo(try req.getDb(), shortUrl: value).flatMap({ video -> EventLoopFuture<View> in
+
+            guard let video = video else {
+                return try req.view().render("404")
+            }
+
+            let tags: [String] = video.tags?.map({ value in
+                return String(describing: value.1)
+            }) ?? []
+
+            let context = VideoDetailContext(video: video, twitterText: video.twitterText, tags: tags)
+            return try req.view().render("video", context)
+        })
     }
     
     router.get("speaker", String.parameter) { req -> EventLoopFuture<View> in
         let value = try req.parameters.next(String.self)
-        guard let speaker = apiClient.getSpeaker(shortUrl: value) else {
-            return try req.view().render("speaker")
-        }
-        
-        let speakerId = speaker["_id"]!
 
-        guard let videos = apiClient.getSpeakerVideos(speakerId: speakerId) else {
-            return try req.view().render("index")
-        }
-        
-        let context = SpeakerContext.init(videos: videos, speaker: speaker)
-        return try req.view().render("speaker", context)
+        return apiClient.getSpeaker(try req.getDb(), shortUrl: value).flatMap({ (speaker) -> EventLoopFuture<View> in
+            guard let speakerId = speaker?["_id"] else {
+                return try req.view().render("index")
+            }
+            
+            guard let speakerVideosFuture = apiClient.getSpeakerVideos(try req.getDb(), speakerId: speakerId) else {
+                return try req.view().render("index")
+            }
+            
+            return speakerVideosFuture.flatMap({ (videos) in
+                let context = SpeakerContext.init(videos: videos, speaker: speaker!)
+                return try req.view().render("speaker", context)
+            })
+        })
     }
     
     router.get("tag", String.parameter) { req -> EventLoopFuture<View> in
         let value = try req.parameters.next(String.self)
-        
-        guard let videos = apiClient.getTagVideos(tag: value) else {
-            return try req.view().render("index")
-        }
-        
-        let context = TagContext.init(videos: videos, tag: value)
-        return try req.view().render("tag", context)
+
+        return apiClient.getTagVideos(try req.getDb(), tag: value).flatMap({ videos in
+            let context = TagContext.init(videos: videos, tag: value)
+            return try req.view().render("tag", context)
+        })
     }
 
     // MARK: - Event
 
     router.get("events") { req -> EventLoopFuture<View> in
-        guard let events = apiClient.getEvents() else {
-            return try req.view().render("404")
-        }
-
+        let events = apiClient.getEvents(try req.getDb())
         return try req.view().render("events", ["events": events])
     }
 
     router.get("event", String.parameter) { req -> EventLoopFuture<View> in
         let value = try req.parameters.next(String.self)
-        guard let event = apiClient.getEvent(shortUrl: value) else {
-            return try req.view().render("404")
-        }
+        let event = apiClient.getEvent(try req.getDb(), shortUrl: value)
 
-
-        guard let eventId = event._id,
-            let videos = apiClient.getEventVideos(eventId: eventId) else {
-            return try req.view().render("404")
-        }
-
-        let context = EventContext(videos: videos, event: event)
-        return try req.view().render("event", context)
+        return event.flatMap({ (event) -> EventLoopFuture<View> in
+            guard let eventId = event?._id else {
+                return try req.view().render("index")
+            }
+            
+            return apiClient.getEventVideos(try req.getDb(), eventId: eventId).flatMap({ (videos) -> EventLoopFuture<View> in
+                let context = EventContext(videos: videos, event: event!)
+                return try req.view().render("event", context)
+            })
+        })
     }
 
     // MARK: - Today's Video
 
     router.get("today") { (req: Request) -> EventLoopFuture<View> in
-        guard let video = apiClient.getTodaysVideo() else {
-            return try req.view().render("404")
-        }
-        
-        let tags: [String] = video.tags?.arrayRepresentation.map({ value in
-            return String(describing: value)
-        }) ?? []
-        
-        let context = VideoDetailContext(video: video, twitterText: video.twitterText, tags: tags)
-        return try req.view().render("video", context)
+        let video = apiClient.getTodaysVideo(try req.getDb())
+
+        return video.flatMap({ maybeVideo -> EventLoopFuture<View> in
+
+            guard let unwrapped = maybeVideo else {
+                return try req.view().render("404")
+            }
+
+            let tags: [String] = unwrapped.tags?.map({ value in
+                return String(describing: value)
+            }) ?? []
+
+            let context = VideoDetailContext(video: unwrapped, twitterText: unwrapped.twitterText, tags: tags)
+            return try req.view().render("video", context)
+        })
     }
     
     // MARK: - RSS
 
-    router.get("rss") { req -> Response in
-        let videos = apiClient.getLatestVideos(limit: 20) ?? []
-        
-        let rssGenerator = RSSFeedGenerator(videoList: videos)
-        let xmlFeed = rssGenerator.feedHandler()
-        
-        var httpRes = HTTPResponse(status: .ok, body: xmlFeed)
-        httpRes.headers.replaceOrAdd(name:"Content-Type", value: "application/rss+xml")
-
-        return Response(http: httpRes, using: req)
+    router.get("rss") { req -> EventLoopFuture<Response> in
+        return apiClient.getLatestVideos(try req.getDb(), limit: 20).map({ videos in
+            let rssGenerator = RSSFeedGenerator(videoList: videos)
+            let xmlFeed = rssGenerator.feedHandler()
+            
+            var httpRes = HTTPResponse(status: .ok, body: xmlFeed)
+            httpRes.headers.replaceOrAdd(name:"Content-Type", value: "application/rss+xml")
+            
+            return Response(http: httpRes, using: req)
+        })
     }
     
     // MARK: - Search
     
     router.get("search", String.parameter) { req -> EventLoopFuture<View> in
-        let searchText = try req.parameters.next(String.self)
-        searchAPIClient.save(searchText: searchText)
-        
-        let context = getSearchContext(for: searchText)
-        return try req.view().render("search", context)
-    }
-    
-    router.post("search") { req -> EventLoopFuture<View> in
-        let searchText: String = try req.content.syncGet(at: "searchText")
-        searchAPIClient.save(searchText: searchText)
+        let db = try req.getDb()
 
-        let context = getSearchContext(for: searchText)
-        return try req.view().render("search", context)
+        let searchText = try req.parameters.next(String.self)
+        searchAPIClient.save(db, searchText: searchText)
+
+        return getSearchContext(db, for: searchText).flatMap({ context in
+            return try req.view().render("search", context)
+        })
     }
-    
-    func getSearchContext(for searchText: String) -> SearchContext {
-        let speakers = searchAPIClient.getSearchedSpeakers(searchText: searchText) ?? []
-        let conferences = searchAPIClient.getSearchedConferences(searchText: searchText) ?? []
-        let videos = searchAPIClient.getSearchedVideos(searchText: searchText) ?? []
-        let tags = searchAPIClient.getSearchedTags(searchText: searchText) ?? []
-        
-        var hasResult = true
-        if speakers.isEmpty && conferences.isEmpty && videos.isEmpty && tags.isEmpty  {
-            hasResult = false
-        }
-        
-        let context = SearchContext(videos: videos, conferences: conferences, speakers: speakers, tags: tags, hasResult: hasResult)
-        return context
+
+    router.post("search") { req -> EventLoopFuture<View> in
+        let db = try req.getDb()
+
+        let searchText: String = try req.content.syncGet(at: "searchText")
+        searchAPIClient.save(try req.getDb(), searchText: searchText)
+
+        return getSearchContext(db, for: searchText).flatMap({ context in
+            return try req.view().render("search", context)
+        })
+    }
+
+    func getSearchContext(_ db: MongoKitten.Database, for searchText: String) -> EventLoopFuture<SearchContext> {
+        return searchAPIClient.getSearchedSpeakers(db, searchText: searchText)
+            .and(searchAPIClient.getSearchedConferences(db, searchText: searchText))
+            .and(searchAPIClient.getSearchedVideos(db, searchText: searchText))
+            .map ({ (result) -> SearchContext in
+                var hasResult = true
+                if result.0.0.isEmpty && result.0.1.isEmpty && result.1.isEmpty {
+                    hasResult = false
+                }
+
+                let context = SearchContext(videos: result.1, conferences: result.0.1, speakers: result.0.0, hasResult: hasResult)
+                return context
+            })
+    }
+}
+
+private extension Request {
+    func getDb() throws -> MongoKitten.Database {
+        return try make(MongoKitten.Database.self)
     }
 }

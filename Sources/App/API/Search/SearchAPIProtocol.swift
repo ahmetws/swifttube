@@ -9,9 +9,8 @@ import Foundation
 import MongoKitten
 
 protocol SearchAPIProtocol {
-    func getSearchedSpeakers(searchText: String) -> Array<Document>?
-    func getSearchedConferences(searchText: String) -> Array<Document>?
-    func getSearchedVideos(searchText: String) -> Array<Video>?
-    func getSearchedTags(searchText: String) -> Array<Document>?
-    func save(searchText: String)
+    func getSearchedSpeakers(_ db: Database, searchText: String) -> EventLoopFuture<[Document]>
+    func getSearchedConferences(_ db: Database, searchText: String) -> EventLoopFuture<[Document]>
+    func getSearchedVideos(_ db: Database, searchText: String) -> EventLoopFuture<[Video]>
+    func save(_ db: Database, searchText: String)
 }
