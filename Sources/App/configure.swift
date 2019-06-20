@@ -22,7 +22,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
         return tags
     }
     
-    let connectionURI = Environment.get("DB_URL")!// "mongodb://localhost"
+    let connectionURI = Environment.get("DB_URL")!
     
     services.register(MongoKitten.Database.self) { container -> MongoKitten.Database in
         return try MongoKitten.Database.lazyConnect(connectionURI, on: container.eventLoop)
