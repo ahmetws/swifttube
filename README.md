@@ -8,6 +8,12 @@
 
 ⭐️ Please leave a star to support Swifttube!
 
+# 👩‍💻 How to run the project
+* Clone the repository
+* Navigate into it and run `vapor update` ([make sure to install Vapor](https://docs.vapor.codes/3.0/install/macos/))
+* Open the Xcode project and press run (Make sure the Swifttube scheme is selected)
+* Go to `localhost:8080` in a browser to see the website. 
+
 
 # 🤝 How to help
 
