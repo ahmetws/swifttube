@@ -8,6 +8,12 @@
 
 ⭐️ Please leave a star to support Swifttube!
 
+# 👩‍💻 How to run the project
+* Clone the repository
+* Navigate into it and run `vapor update` ([make sure to install Vapor](https://docs.vapor.codes/3.0/install/macos/))
+* Open the Xcode project and press run (Make sure the Swifttube scheme is selected)
+* Go to `localhost:8080` in a browser to see the website. 
+
 
 # 🤝 How to help
 
@@ -20,13 +26,6 @@
 
 - You can help us out by resolving TODOs and replying on issues
 - Of course, all feedback, positive and negative, also really helps to improve the project
-
-### How to run the project
-* Clone the repository
-* Navigate into it and run `vapor update` ([make sure to install Vapor](https://docs.vapor.codes/3.0/install/macos/))
-* To add the test database: click on the "Run" target in the top left hand side and add the environment variable `DB_URL` with a value of `mongodb://swifttube-test:test123@ds113445.mlab.com:13445/swifttube-test`
-
-![TestDatabaseConfig](Public/img/test_database_config.png)
 
 # 👏 Thanks
 
