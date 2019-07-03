@@ -120,6 +120,7 @@ public func routes(_ router: Router) throws {
             }
             
             return speakerVideosFuture.flatMap({ (videos) in
+                videos.forEach{ $0.setIsUpComing() }
                 let context = SpeakerContext.init(videos: videos, speaker: speaker!)
                 return try req.view().render("speaker", context)
             })
@@ -154,6 +155,7 @@ public func routes(_ router: Router) throws {
                 }
 
                 return apiClient.getEventVideos(db, eventId: eventId).flatMap({ (videos) -> EventLoopFuture<View> in
+                    videos.forEach{ $0.setIsUpComing() }
                     let context = EventContext(videos: videos, event: event!)
                     return try req.view().render("event", context)
                 })

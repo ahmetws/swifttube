@@ -27,6 +27,11 @@
                     <span class="date text-grey-500">
                      #date(video.videoDate, "dd MMM yyyy")
                      </span>
+                    #if(video.isUpcoming) {
+                    <span class="upcoming">
+                        #Upcoming
+                    </span>
+                    }
                 </div>
             </a>
             }

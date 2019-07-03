@@ -14,6 +14,7 @@ final class Video: Content, Codable {
     var external: Bool?
     var createdAt: Date?
     var videoDate: Date?
+    var isUpcoming: Bool?
 
     lazy var twitterText: String = {
         var text = "I just watched this great video \(title ?? "") by"
@@ -47,4 +48,11 @@ final class Video: Content, Codable {
     
     init() { }
     
+    func setIsUpComing() {
+        if let videoDate = videoDate {
+            isUpcoming = videoDate > Date()
+        } else {
+            isUpcoming =  false
+        }
+    }
 }
