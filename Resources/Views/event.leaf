@@ -35,7 +35,11 @@
     <div class="row">
         <div class="col-sm">
             <div class="no-content-container" style="text-align: center">
+                #if(isUpcoming){
+                <b>#(event.fullname)</b> will take place on <b>#date(event.startDate, "yyyy/MM/dd")</b>. There are no videos for the event right now.
+                } else {
                 There are no videos for <b>#(event.fullname)</b> right now.<br/> We are working hard to add new videos and we hope they will be here soon.
+                }
             </div>
         </div>
     </div>
