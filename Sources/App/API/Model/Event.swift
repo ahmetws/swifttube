@@ -7,6 +7,11 @@ final class Event: Codable {
     var shortname: String?
     var website: String?
     var conferencesArray: [Document]?
+    var startDate: Date?
+    var isUpcoming: Bool {
+        guard let date = startDate else { return false }
+        return date.isFuture(from: Date())
+    }
 
     init() { }
 }
