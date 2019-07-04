@@ -154,7 +154,7 @@ public func routes(_ router: Router) throws {
                 }
 
                 return apiClient.getEventVideos(db, eventId: eventId).flatMap({ (videos) -> EventLoopFuture<View> in
-                    let context = EventContext(videos: videos, event: event!)
+                    let context = EventContext(videos: videos, event: event!, isUpcoming: event!.isUpcoming)
                     return try req.view().render("event", context)
                 })
             })
