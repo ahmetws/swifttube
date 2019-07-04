@@ -11,4 +11,8 @@ extension Date {
         components.second = -1
         return Calendar.current.date(byAdding: components, to: startOfDay)!
     }
+    
+    func isFuture(from date: Date) -> Bool {
+        return date < self
+    }
 }
