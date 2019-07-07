@@ -1,4 +1,0 @@
-module CNIOOpenSSL {
-    umbrella "/Users/tompearson/Code/swifttube/.build/checkouts/swift-nio-ssl/Sources/CNIOOpenSSL/include"
-    export *
-}

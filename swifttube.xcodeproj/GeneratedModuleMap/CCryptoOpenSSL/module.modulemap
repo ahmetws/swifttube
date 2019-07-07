@@ -1,4 +1,0 @@
-module CCryptoOpenSSL {
-    umbrella "/Users/tompearson/Code/swifttube/.build/checkouts/crypto/Sources/CCryptoOpenSSL/include"
-    export *
-}
