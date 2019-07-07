@@ -1,4 +1,0 @@
-module CNIOLinux {
-    umbrella "/Users/ahmetws/Desktop/swiftist/swifttube/.build/checkouts/swift-nio.git--4997288932090921785/Sources/CNIOLinux/include"
-    export *
-}

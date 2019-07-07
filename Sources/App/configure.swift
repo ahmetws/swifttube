@@ -22,7 +22,13 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
         return tags
     }
     
-    let connectionURI = Environment.get("DB_URL")!
+    var connectionURI: String {
+        if let url = Environment.get("DB_URL") {
+            return url
+        }
+        // TODO: move this line to a config file
+        return "mongodb://swifttube-test:test123@ds113445.mlab.com:13445/swifttube-test"
+    }
     
     services.register(MongoKitten.Database.self) { container -> MongoKitten.Database in
         return try MongoKitten.Database.lazyConnect(connectionURI, on: container.eventLoop)
