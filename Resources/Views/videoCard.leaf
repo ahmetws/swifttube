@@ -25,8 +25,8 @@
                 <div class="card-subtitle">
                     #(event.fullname)
                     <span class="date text-grey-500">
-                     #date(video.videoDate, "dd MMM yyyy")
-                     </span>
+                        #date(video.videoDate, "dd MMM yyyy")
+                    </span>
                     #if(video.isUpcoming) {
                     <span class="upcoming">
                         #Upcoming
@@ -44,10 +44,10 @@
                     <div class="avatar">
                         #if(speaker.image != "") {
                         <img src="#(speaker.image)" alt="#(speaker.fullname)">
-                        } else {
-                        <img src="/img/swifttube-default.jpg" alt="#(speaker.fullname)">
-                        }
-                    </div>
+                            } else {
+                            <img src="/img/swifttube-default.jpg" alt="#(speaker.fullname)">
+                                }
+                                </div>
                     
                     <div class="card-text">#(speaker.fullname)</div>
                 </div>
