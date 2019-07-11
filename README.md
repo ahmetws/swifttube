@@ -11,7 +11,8 @@
 # 👩‍💻 How to run the project
 * Clone the repository
 * Navigate into it and run `vapor update` ([make sure to install Vapor](https://docs.vapor.codes/3.0/install/macos/))
-* Open the Xcode project and press run (Make sure the Swifttube scheme is selected)
+* To use Xcode, you just need to generate an Xcode project using `vapor xcode`
+* If this command is not working, make sure to select Command line tools in your Xcode.
 * Go to `localhost:8080` in a browser to see the website. 
 
 
