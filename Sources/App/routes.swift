@@ -120,7 +120,7 @@ public func routes(_ router: Router) throws {
             }
             
             return speakerVideosFuture.flatMap({ (videos) in
-                let context = SpeakerContext.init(videos: videos, speaker: speaker!)
+                let context = SpeakerContext(videos: videos, speaker: speaker!)
                 return try req.view().render("speaker", context)
             })
         })
