@@ -179,6 +179,14 @@ class APIClient: APIProtocol {
                 }
             })
     }
+    
+    func getFeaturedEvents(_ db: Database) -> EventLoopFuture<[Event]> {
+        return db[.events]
+            .find("featured" == true)
+            .decode(Event.self)
+            .limit(3)
+            .getAllResults()
+    }
 
     func getEventVideos(_ db: Database, eventId: Primitive) -> EventLoopFuture<[Video]>	 {
         return getAggregatedVideos(db)

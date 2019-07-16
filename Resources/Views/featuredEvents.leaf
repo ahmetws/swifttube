@@ -1,0 +1,20 @@
+<div class="container">
+    <section>
+        <div class="row">
+            <div class="col-sm">
+                <div class="section-header-container">
+                    <h2>#(eventsTitle)</h2>
+                    <a href="/events">See all events</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            #for(event in events) {
+            <div class="col-sm col-md-4">
+                #embed("eventCard")
+            </div>
+            }
+        </div>
+    </section>
+</div>

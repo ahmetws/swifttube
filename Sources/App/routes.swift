@@ -11,8 +11,9 @@ public func routes(_ router: Router) throws {
         let db = try req.getDb()
         return apiClient.getFeaturedVideos(db)
             .and(apiClient.getFeaturedConferences(db))
+            .and(apiClient.getFeaturedEvents(db))
             .map({ (result) -> HomeContext in
-                let context = HomeContext(videos: result.0, conferences: result.1)
+                let context = HomeContext(videos: result.0.0, conferences: result.0.1, events: result.1)
                 return context
             })
             .flatMap({ context in

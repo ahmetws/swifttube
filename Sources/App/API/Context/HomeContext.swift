@@ -12,4 +12,5 @@ import Vapor
 struct HomeContext: Content {
     var videos: [Video]
     var conferences: [Document]
+    var events: [Event]
 }

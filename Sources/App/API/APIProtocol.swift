@@ -21,6 +21,7 @@ protocol APIProtocol {
 
     func getEvents(_ db: Database) -> EventLoopFuture<[Event]>
     func getEvent(_ db: Database, shortUrl: String) -> EventLoopFuture<Event?>
+    func getFeaturedEvents(_ db: Database) -> EventLoopFuture<[Event]>
     func getEventVideos(_ db: Database, eventId: Primitive) -> EventLoopFuture<[Video]>
 
     func getTagVideos(_ db: Database, tag: String) -> EventLoopFuture<[Video]>

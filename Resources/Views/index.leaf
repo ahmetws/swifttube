@@ -16,6 +16,10 @@
 Featured Conferences
 }
 
+#set("eventsTitle") {
+Featured Events
+}
+
 #set("content") {
 
 <div class="container hideOnMediumAndUp">
@@ -69,6 +73,8 @@ Featured Conferences
 
 
 #embed("videosSection")
+
+#embed("featuredEvents")
 
 #embed("featuredTags")
 
