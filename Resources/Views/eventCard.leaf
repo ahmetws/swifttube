@@ -1,5 +1,10 @@
 <a href="/event/#(event.shortname)">
-    <div class="conference-cell-no-image">
+    <div class="event-cell">
         <p>#(event.fullname)</p>
+        <span class="date">
+            #if(event.startDate != nil || event.endDate != nil) {
+            #date(event.startDate, "dd MMM yyyy") - #date(event.endDate, "dd MMM yyyy")
+            }
+        </span>
     </div>
 </a>

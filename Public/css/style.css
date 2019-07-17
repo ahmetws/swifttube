@@ -633,3 +633,29 @@ video {
     color: #fff;
     margin: 3px 2px;
 }
+
+/* event */
+
+.event-cell {
+    padding: .25rem;
+    background: #0e8fff;
+    border-radius: 8px;
+    object-fit: cover;
+    width: 100%;
+    font-size: 20px;
+    text-overflow: ellipsis;
+    margin-bottom: .5rem;
+    text-align: center;
+}
+
+.event-cell p {
+    padding: .5rem;
+    color: white;
+    margin-bottom: 0px;
+}
+
+.event-cell .date {
+    display: inline-block;
+    font-size: 14px;
+    color: white;
+}
