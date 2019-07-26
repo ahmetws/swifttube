@@ -3,6 +3,7 @@
 
         <li class="#if(previous == nil) { disabled } page-item">
             <a #if(previous) { href="#(previous.url)" } class="page-link" rel="prev" aria-label="Previous">
+                <span aria-hidden="true">«</span>
                 <span class="sr-only">Previous</span>
             </a>
         </li>
@@ -26,9 +27,11 @@
         
         <li class="#if(next == nil) { disabled } page-item">
             <a #if(next) { href="#(next.url)" } class="page-link" rel="next" aria-label="Next">
+                <span aria-hidden="true">»</span>
                 <span class="sr-only">Next</span>
             </a>
         </li>
 
     </ul>
 </nav>
+
