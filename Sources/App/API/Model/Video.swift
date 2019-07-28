@@ -48,7 +48,7 @@ final class Video: Content, Codable {
     
     init() { }
     
-    func setIsUpComing() {
+    func setIsUpcoming() {
         if let videoDate = videoDate {
             isUpcoming = videoDate > Date()
         } else {

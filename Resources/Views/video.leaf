@@ -30,7 +30,14 @@
                         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
                 </div>
-                #if(video.external) {
+                #if(video.isUpcoming) {
+                <div class="video-detail-external">
+                    The video will be here after <b>#date(video.videoDate, "dd MMM yyyy")</b>
+                    </br>
+                    </br>
+                    <a href="#(video.url)" target="_blank">More Details...</a>
+                </div>
+                } else if(video.external) {
                 <div class="video-detail-external">
                     The source of the video doesn't allow us to embed the video in here.
                     </br>
