@@ -18,7 +18,7 @@ struct SpeakerContext: Content {
     var speaker: Document
     
     init(videos: [Video], speaker: Document) {
-        videos.forEach{ $0.setIsUpComing() }
+        videos.forEach{ $0.setIsUpcoming() }
         self.videos = videos
         self.speaker = speaker
     }
