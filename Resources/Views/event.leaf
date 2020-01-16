@@ -6,7 +6,7 @@
             <div class="col-sm">
                 <div class="section-header-container">
                     <div>
-                        <h2>#(event.fullname)</h2>
+                        <h2>#(event.fullname) (#date(event.startDate, "d MMM") - #date(event.endDate, "d MMM yyyy"))</h2>
                         #for(conference in event.conferencesArray) {
                         <a href="/conference/#(conference.shortname)">
                             <div class="card-subtitle">
