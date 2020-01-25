@@ -164,6 +164,7 @@ class APIClient: APIProtocol {
     func getEvents(_ db: Database) -> EventLoopFuture<[Event]> {
         return db[.events]
             .find()
+            .sort(["startDate": .descending])
             .decode(Event.self)
             .getAllResults()
     }
