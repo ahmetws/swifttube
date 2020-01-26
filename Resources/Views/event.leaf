@@ -7,7 +7,7 @@
                 <div class="section-header-container">
                     <div>
                         #if(event.startDate != nil && event.endDate != nil) {
-                            <h2>#(event.fullname) (#date(event.startDate, "dd MMM yyyy") - #date(event.endDate, "dd MMM yyyy"))</h2>
+                            <h2>#(event.fullname) (#date(event.startDate, "d MMM") - #date(event.endDate, "dd MMM yyyy"))</h2>
                         } else {
                             <h2>#(event.fullname)</h2>
                         }
